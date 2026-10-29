@@ -16,5 +16,6 @@ export * from './llm';
 export * from './author';
 export * from './costs';
 export * from './gemini';
-export * from './scriptEngine';
+export * from './topics';
 export * from './batch';
+export * from './quick';

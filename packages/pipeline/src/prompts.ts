@@ -73,9 +73,11 @@ export const scriptPrompt = (
 };
 
 /** The manifest without the parts the planner doesn't need. */
-export const plannerManifest = () => {
+/** What the planner may use; a pack limits the sets to that pack's. */
+export const plannerManifest = (pack?: string) => {
   const m = buildManifest();
-  return { sets: m.sets, props: m.props, actions: m.actions, characters: m.characters, palettes: m.palettes, fx: m.fx, transitions: m.transitions };
+  const sets = pack ? m.sets.filter((s) => s.pack === pack) : m.sets;
+  return { sets, props: m.props, actions: m.actions, characters: m.characters, palettes: m.palettes, fx: m.fx, transitions: m.transitions };
 };
 
 const EXAMPLE_SHOT = () => {
@@ -89,7 +91,7 @@ export const planPrompt = (slug: string) => {
   return renderTemplate('plan', {
     script: json(script),
     brief: json(brief),
-    manifest: JSON.stringify(plannerManifest()),
+    manifest: JSON.stringify(plannerManifest(brief.pack)),
     sfx: loadSfxLibrary().map((s) => `\`${s.id}\`${s.loop ? ' (loop)' : ''}`).join(', ') || '(none yet)',
     slug,
     schema: JSON.stringify(z.toJSONSchema(StorySpec, { io: 'input' })),

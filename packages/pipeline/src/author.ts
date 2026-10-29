@@ -38,6 +38,7 @@ export type NewStoryOptions = {
   constraints?: string[];
   slug?: string;
   topicList?: string;
+  pack?: string;
 };
 
 /** `pc new`: create data/stories/<slug>/00-brief.json (slug made unique) and state.json. */
@@ -57,6 +58,7 @@ export const newStory = (o: NewStoryOptions): string => {
     formats: o.formats ?? ['vertical'],
     constraints: o.constraints ?? (genre === 'true_crime' ? ['no graphic detail'] : []),
     topicList: o.topicList,
+    pack: o.pack,
   });
   writeJson(storyFile(slug, FILES.brief), brief);
   saveState({ slug, status: 'draft', stages: {} });

@@ -34,13 +34,14 @@ Every story renders **vertical (1080×1920)** and/or **horizontal (1920×1080)**
 - `pnpm pc <cmd>` (or `apps/cli/bin/pc`): `approve`, `validate plan`, `tts`, `time`, `render [--format all] [--still 0.4]`, `run <slug|fixture-dir> [--from/--to]`, `voices --line "…"`, `status`, `assets placeholders`
 - `pnpm pc run fixtures/monkeys-paw-30s`: the Phase 2 acceptance story (script → voice → timing → both formats)
 - Authoring: `pc new "<topic>" [--genre --series --seconds --format all]`, `pc prompt research|script|plan <slug>`, `pc validate script|plan <slug>`, `pc approve <slug>`, `pc script|plan <slug> --mode api`, `pc render <slug> --shots` (one still per shot + sheet)
+- **Making stories (the default, cheap path):** `pc make "<topic>" [--pack folklore|crime --genre folklore --seconds 40]` — one Gemini Flash-Lite call writes the narration and the shot plan from a compact kit catalogue (`prompts/quick.md`, ~3k tokens), validated against the kit; then Sarvam voice, timing and render in both formats. About ₹3 per video. For volume: `pc topics add <file> --pack …` → owner runs `pc topics approve <id>` → `pc batch <id>` (pc make per topic). Folklore/drama/fiction only; true crime, history and mystery must cite sources and use the researched path below. Keep this path cheap: no multi-call research/candidate/judge pipelines.
 - Slash commands: `/new-story`, `/approve`, `/voice-test`, `/kit`; subagents `researcher`, `shot-planner`
 - Not built yet: `pnpm server`, `pc qa` / `pc package` (Phase 4)
 
 ## Authoring (Phase 3)
 - Claude Code mode (default): Claude Code researches and writes `01-research.md`, `02-script.json` and `03-plan.json` from `pc prompt …`, then `pc validate …` must pass. API mode (`--mode api`) runs the same templates through the Anthropic API (`claude-opus-5-5` for script, `claude-sonnet-5-5` for plan, refusal fallbacks on) and needs `ANTHROPIC_API_KEY`.
 - Script word budgets come from the series narrator's measured speaking rate (`data/cache/voice-rates.json`, learned from every Sarvam run).
-- **Stop at `scripted` and show the owner the script. Never run `pc approve` yourself — for true crime this is absolute.** In the platform flow (`pc topics` / `pc batch`) the owner approves topic lists instead; scripts then pass only through the automated sensitivity gate, and anything it flags waits in `needs_review` for the owner.
+- **Stop at `scripted` and show the owner the script. Never run `pc approve` yourself — for true crime this is absolute.**
 
 ## Costs
 - Every billable call (Sarvam TTS characters, Anthropic tokens and web searches) appends to `data/costs.jsonl`. Prices live in `config/pricing.json` (editable; USD→INR rate included) and amounts are computed from it.

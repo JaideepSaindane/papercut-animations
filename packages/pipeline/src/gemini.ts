@@ -99,24 +99,6 @@ export const geminiCall = async (o: GeminiCall): Promise<GeminiResult> => {
   return { text, content: cand?.content, sources, supports, searchQueries };
 };
 
-/** Grounding links are Google redirects that expire; follow them once to keep the real page URL. */
-export const resolveSourceUrls = async (sources: { title: string; uri: string }[], fetchFn: typeof fetch = fetch) => {
-  const seen = new Map<string, { title: string; url: string }>();
-  for (const s of sources) {
-    let url = s.uri;
-    if (/grounding-api-redirect|vertexaisearch/.test(url)) {
-      try {
-        const r = await fetchFn(url, { method: 'HEAD', redirect: 'manual' });
-        url = r.headers.get('location') ?? url;
-      } catch {
-        // keep the redirect link if resolution fails
-      }
-    }
-    if (!seen.has(url)) seen.set(url, { title: s.title, url });
-  }
-  return [...seen.values()];
-};
-
 /**
  * Ask for JSON, validate it, and send the validator's errors back for a fix (up to `repairs` rounds).
  * The model's own turn is appended unchanged before the fix request.

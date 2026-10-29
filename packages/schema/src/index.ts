@@ -33,7 +33,9 @@ export const Brief = z.object({
   topic: z.string(),
   series: z.string().optional(),
   part: z.number().int().optional(),
-  genre: z.enum(['true_crime', 'horror_classic', 'history', 'mystery', 'other']),
+  genre: z.enum(['true_crime', 'horror_classic', 'history', 'mystery', 'folklore', 'drama', 'other']),
+  /** creative pack the story draws its sets/props from (kit packs.ts); sets the render style */
+  pack: z.string().optional(),
   targetSeconds: z.number().min(10).max(90).default(60),
   languages: z.array(Language).default(['en-IN']),
   /** which output formats to render; one plan renders to every format listed */
@@ -391,6 +393,7 @@ export const TopicList = z.object({
   name: z.string(),
   series: z.string().optional(),
   genre: Brief.shape.genre,
+  pack: z.string().optional(),
   targetSeconds: z.number().min(10).max(90).default(45),
   languages: z.array(Language).default(['en-IN', 'hi-IN']),
   formats: z.array(Format).min(1).default(['vertical', 'horizontal']),
@@ -401,48 +404,3 @@ export const TopicList = z.object({
 });
 export type TopicList = z.infer<typeof TopicList>;
 
-// ---------- Script engine outputs ----------
-export const JudgeScore = z.object({
-  candidate: z.string(),
-  hook: z.number(),
-  ear: z.number(),
-  pacing: z.number(),
-  grounding: z.number(),
-  structure: z.number(),
-  sensitivity: z.number(),
-  playbook: z.number(),
-  overall: z.number(),
-  notes: z.string(),
-});
-export const Judgement = z.object({ scores: z.array(JudgeScore).min(1), winner: z.string(), why: z.string() });
-export const SensitivityReview = z.object({
-  verdict: z.enum(['pass', 'review', 'fail']),
-  issues: z.array(z.object({ lineId: z.string().optional(), rule: z.number().optional(), issue: z.string(), suggestion: z.string().optional() })).default([]),
-});
-export type Judgement = z.infer<typeof Judgement>;
-export type SensitivityReview = z.infer<typeof SensitivityReview>;
-
-/** Facts about a script captured at birth; the analytics engine joins these with performance. */
-export const ScriptFeatures = z.object({
-  slug: z.string(),
-  genre: z.string(),
-  series: z.string().optional(),
-  language: z.string(),
-  hookStyle: z.string(),
-  experiment: z.string().optional(),
-  hookWords: z.number(),
-  words: z.number(),
-  lines: z.number(),
-  avgWordsPerLine: z.number(),
-  beats: z.record(z.string(), z.number()),
-  estSeconds: z.number(),
-  speaker: z.string(),
-  pace: z.number(),
-  judgeOverall: z.number(),
-  candidates: z.number(),
-  sensitivity: z.enum(['pass', 'review', 'fail']),
-  models: z.record(z.string(), z.string()),
-  playbookVersion: z.number(),
-  createdAt: z.string(),
-});
-export type ScriptFeatures = z.infer<typeof ScriptFeatures>;

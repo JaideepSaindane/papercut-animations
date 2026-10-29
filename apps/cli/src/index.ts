@@ -5,12 +5,11 @@ import { Command, Option } from 'commander';
 import { Brief, Format, TtsEngine, type StoryState } from '@papercut/schema';
 import {
   STAGES,
+  makeVideo,
   approveStory,
   approveTopicList,
   createTopicList,
   runBatch,
-  runScriptEngine,
-  planWithGemini,
   checkPlan,
   money,
   summarise,
@@ -108,10 +107,7 @@ program
   .action(
     action(async (slug: string, o: { mode: Mode }) => {
       if (o.mode === 'api') {
-        if ((process.env.PC_LLM_PROVIDER ?? 'gemini') === 'anthropic') return printIssues(`script ${slug}`, await researchAndScriptApi(slug));
-        const r = await runScriptEngine(slug);
-        console.log(r.status === 'approved' ? 'approved' : `needs review:\n  ${r.reasons.join('\n  ')}`);
-        return;
+        return printIssues(`script ${slug}`, await researchAndScriptApi(slug));
       }
       console.log(`Claude Code mode: run /new-story in Claude Code, or render the prompts with
   pc prompt research ${slug}
@@ -127,8 +123,7 @@ program
   .action(
     action(async (slug: string, o: { mode: Mode }) => {
       if (o.mode === 'api') {
-        if ((process.env.PC_LLM_PROVIDER ?? 'gemini') === 'anthropic') return printIssues(`plan ${slug}`, await planApi(slug));
-        return printIssues(`plan ${slug}`, await planWithGemini(slug));
+        return printIssues(`plan ${slug}`, await planApi(slug));
       }
       console.log(`Claude Code mode: run /approve ${slug} in Claude Code, or render the prompt with
   pc prompt plan ${slug}
@@ -256,31 +251,51 @@ program
     }),
   );
 
+program
+  .command('make <topic>')
+  .description('the cheap path: one Gemini Flash-Lite call writes the story + shot plan from the kit, then voice and render (folklore, drama, fiction)')
+  .option('--pack <id>', 'creative pack (folklore, crime)', 'folklore')
+  .addOption(new Option('--genre <genre>').choices(Brief.shape.genre.options).default('folklore'))
+  .option('--seconds <n>', 'target length', '40')
+  .option('--format <formats>', 'vertical, horizontal, or all', 'all')
+  .option('--series <name>', 'series (voice + music config)')
+  .option('--notes <text>', 'extra direction for the writer')
+  .option('--model <id>', 'Gemini model (default: the fast model, Flash-Lite)')
+  .addOption(engineOpt())
+  .action(
+    action(async (topic: string, o: { pack: string; genre: Brief['genre']; seconds: string; format: string; series?: string; notes?: string; model?: string; engine?: TtsEngine }) => {
+      const r = await makeVideo({ topic, pack: o.pack, genre: o.genre, seconds: Number(o.seconds), formats: formatList(o.format), series: o.series, notes: o.notes, model: o.model, engine: o.engine });
+      for (const f of r.outputs) console.log(`  ${f}`);
+      console.log(`cost: pc costs ${r.slug}`);
+    }),
+  );
+
 const topics = program.command('topics').description('topic lists: the owner approves lists, the engine does the rest');
 topics
   .command('add <file>')
   .description('create a draft topic list from a CSV (topic[,part,notes]) or a text file (one topic per line)')
-  .addOption(new Option('--genre <genre>').choices(Brief.shape.genre.options).default('true_crime'))
+  .addOption(new Option('--genre <genre>').choices(Brief.shape.genre.options).default('folklore'))
+  .option('--pack <id>', 'creative pack (folklore, crime)', 'folklore')
   .option('--series <name>', 'series (voice + music config)')
   .option('--name <name>', 'list name')
   .option('--seconds <n>', 'target length per video', '45')
-  .option('--lang <langs>', 'comma-separated languages', 'en-IN,hi-IN')
+  .option('--lang <langs>', 'comma-separated languages', 'en-IN')
   .option('--format <formats>', 'vertical, horizontal, or all', 'all')
   .action(
-    action((file: string, o: { genre: Brief['genre']; series?: string; name?: string; seconds: string; lang: string; format: string }) => {
-      const list = createTopicList({ file, genre: o.genre, series: o.series, name: o.name, seconds: Number(o.seconds), languages: o.lang.split(','), formats: formatList(o.format) });
+    action((file: string, o: { genre: Brief['genre']; pack: string; series?: string; name?: string; seconds: string; lang: string; format: string }) => {
+      const list = createTopicList({ file, genre: o.genre, pack: o.pack, series: o.series, name: o.name, seconds: Number(o.seconds), languages: o.lang.split(','), formats: formatList(o.format) });
       list.topics.forEach((t, i) => console.log(`  ${String(i + 1).padStart(2)}. ${t.topic}`));
       console.log(`approve with: pc topics approve ${list.id}`);
     }),
   );
 topics
   .command('approve <id>')
-  .description('approve a topic list (the human gate: scripts from it auto-approve if they pass the sensitivity review)')
+  .description('approve a topic list (the human gate: pc batch then makes every topic)')
   .action(action((id: string) => approveTopicList(id)));
 
 program
   .command('batch <listId>')
-  .description('research, write (3 candidates), judge, review and plan every topic of an approved list')
+  .description('make every topic of an approved list the cheap way (one Gemini call each, then voice and render)')
   .option('--concurrency <n>', 'stories in parallel', '2')
   .action(action(async (id: string, o: { concurrency: string }) => runBatch(id, { concurrency: Number(o.concurrency) })));
 
