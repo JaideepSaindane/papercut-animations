@@ -315,7 +315,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "clearing": [
@@ -357,7 +358,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "courtyard": [
@@ -403,7 +405,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "steps": [
@@ -445,7 +448,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "courtyard": [
@@ -491,7 +495,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "path": [
@@ -533,7 +538,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "snowfield": [
@@ -571,7 +577,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "path": [
@@ -613,7 +620,8 @@
         "folk"
       ],
       "params": {
-        "time": "day | dusk | night (default dusk)"
+        "time": "day | dusk | night (default dusk)",
+        "moon": "false hides the sun/moon (e.g. it was stolen)"
       },
       "anchors": {
         "hall": [

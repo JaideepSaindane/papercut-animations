@@ -5,7 +5,7 @@ import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import proof from '../../video/fixtures/folklore-proof.spec.json';
 import type { GeminiClient } from './gemini';
-import { quickCatalogue, quickStory } from './quick';
+import { quality, quickCatalogue, quickStory } from './quick';
 import { loadPlan, loadScript, loadState } from './story';
 
 let tmp: string;
@@ -72,12 +72,42 @@ describe('pc make (one call)', () => {
     expect(cat.length / 4).toBeLessThan(9000); // ~tokens
   });
 
-  it('writes script + plan in one call (plus one repair for an unknown set), sets the pack style and approves', async () => {
+  it('flags short narration, long lines and repeated framing as fixes', () => {
+    const script = {
+      title: 't',
+      hook: 'a',
+      sources: [],
+      sensitivityNotes: [],
+      lines: [
+        { id: 'L01', vo: 'one two three four five six', caption: 'c', sourceIds: [], beat: 'hook' as const },
+        {
+          id: 'L02',
+          vo: 'a b c d e f g h i j k l m n o',
+          caption: 'c',
+          sourceIds: [],
+          beat: 'turn' as const,
+        },
+      ],
+    };
+    const q = quality(script, 90, [
+      'S03: third shot in a row on folk_jungle/full (vary the framing)',
+      'S01: nothing moves',
+    ]);
+    expect(q[0]).toMatch(/21 words but must be about 90/);
+    expect(q[1]).toMatch(/L02 has 15 words/);
+    expect(q[2]).toMatch(/in a row/);
+    expect(q).toHaveLength(3); // plain warnings stay warnings
+    expect(quality({ ...script, lines: script.lines.slice(0, 1) }, 6, [])).toEqual([]);
+  });
+
+  it('writes script + plan in one call, repairs errors, retries quality issues but never fails on them', async () => {
     const { client, calls } = fake();
     const slug = await quickStory({ topic: 'The girl and the tiger', pack: 'folklore', client });
-    expect(calls).toHaveLength(2);
+    // 1: unknown set (+ too short) → 2: still too short → 3: accepted despite the length
+    expect(calls).toHaveLength(3);
     expect(calls[0].model).toBe('gemini-3.1-flash-lite');
     expect(calls[1].prompt).toContain('folk_spaceport');
+    expect(calls[2].prompt).toMatch(/words but must be about/);
     expect(loadScript(slug).lines).toHaveLength(3);
     expect(loadPlan(slug).style).toBe('diorama');
     expect(loadState(slug).status).toBe('planned');

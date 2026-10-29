@@ -311,10 +311,11 @@ export const Cloud: React.FC<{ x: number; y: number; w: number; fill: string; se
 };
 
 /** Sky for any folk set: gradient, then sun + clouds (day), crescent + a few stars (dusk), full moon + stars (night). */
-export const FolkSky: React.FC<{ time: FolkTime; body?: [number, number]; clouds?: boolean }> = ({
+export const FolkSky: React.FC<{ time: FolkTime; body?: [number, number]; clouds?: boolean; hidden?: boolean }> = ({
   time,
   body = [210, 730],
   clouds = true,
+  hidden = false,
 }) => {
   const view = useView();
   const { id, url } = useDefs();
@@ -341,7 +342,7 @@ export const FolkSky: React.FC<{ time: FolkTime; body?: [number, number]; clouds
             fill={time === 'night' && i % 3 === 0 ? JEWEL.cream : JEWEL.gold}
           />
         ))}
-      {time === 'day' && <Sun cx={body[0]} cy={body[1] - 40} r={70} />}
+      {!hidden && time === 'day' && <Sun cx={body[0]} cy={body[1] - 40} r={70} />}
       {time === 'day' &&
         clouds &&
         across(view.x0, view.x1, 520).map((x, i) => (
@@ -354,8 +355,8 @@ export const FolkSky: React.FC<{ time: FolkTime; body?: [number, number]; clouds
             seed={i}
           />
         ))}
-      {time === 'dusk' && <Crescent cx={body[0]} cy={body[1]} r={100} />}
-      {time === 'night' && <FullMoon cx={body[0]} cy={body[1]} r={88} />}
+      {!hidden && time === 'dusk' && <Crescent cx={body[0]} cy={body[1]} r={100} />}
+      {!hidden && time === 'night' && <FullMoon cx={body[0]} cy={body[1]} r={88} />}
     </>
   );
 };

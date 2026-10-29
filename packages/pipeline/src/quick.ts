@@ -11,6 +11,7 @@ import { geminiJson, geminiModels, makeGemini, userText, type GeminiClient } fro
 import { renderTemplate, wordBudget } from './prompts';
 import { FILES, loadBrief, loadSeries, markStage, storyFile } from './story';
 import { validatePlan, validateScript } from './validate';
+import { wordCount } from './normalise';
 import { runStory, type RunOptions } from './run';
 
 /** Genres whose lines must cite sources — they need the researched path, not this one. */
@@ -41,6 +42,27 @@ export const quickCatalogue = (pack: string) => {
     `### Actions\n${actions.join('\n')}`,
     `### fx: ${m.fx.join(', ')}\n### transitions: ${m.transitions.join(', ')}`,
   ].join('\n\n');
+};
+
+const REPAIRS = 2;
+const SOFT = /in a row|unsafe zone|outside the horizontal frame|no `turn` beat|more than one `turn`|fade_black_end/;
+
+/**
+ * Quality problems the validator only warns about, worded as fixes: total length within ±15% of the
+ * target, no line over 13 words (it would run past 4.5 s on screen), varied framing, faces in frame.
+ */
+export const quality = (script: Script, targetWords: number, warnings: string[]) => {
+  const out: string[] = [];
+  const words = script.lines.reduce((n, l) => n + wordCount(l.vo), 0);
+  const ratio = words / targetWords;
+  if (ratio < 0.85)
+    out.push(`the narration is ${words} words but must be about ${targetWords} (±15%): add ${Math.ceil(targetWords * 0.9 - words)}+ words as new lines (with new shots), don't pad existing lines`);
+  if (ratio > 1.15) out.push(`the narration is ${words} words but must be about ${targetWords} (±15%): cut ${Math.ceil(words - targetWords * 1.1)}+ words`);
+  for (const l of script.lines) {
+    const w = wordCount(l.vo);
+    if (w > 13) out.push(`${l.id} has ${w} words: keep every line to 6–12 words (split it into two lines, each with its own shot)`);
+  }
+  return [...out, ...warnings.filter((w) => SOFT.test(w))];
 };
 
 const Reply = z.object({
@@ -91,6 +113,7 @@ export const quickStory = async (o: QuickOptions) => {
   ).shots[0];
   const model = o.model ?? geminiModels().fast;
 
+  let round = 0;
   const build = (r: z.infer<typeof Reply>) => {
     const script = Script.parse({
       title: r.title,
@@ -124,6 +147,7 @@ export const quickStory = async (o: QuickOptions) => {
         targetWords: budget.targetWords,
         minLines: budget.minLines,
         maxLines: budget.maxLines,
+        lineCount: Math.max(budget.minLines, Math.round(budget.targetWords / 9)),
         tone: genre === 'folklore' ? 'warm storyteller, a little eerie, wonder-filled' : brief.tone,
         notes: o.notes ? `- Notes: ${o.notes}` : '',
         catalogue: quickCatalogue(pack),
@@ -131,7 +155,7 @@ export const quickStory = async (o: QuickOptions) => {
       }),
     ),
     thinking: 'LOW',
-    repairs: 2,
+    repairs: REPAIRS,
     cost: { slug, stage: 'quick' },
     check: (raw) => {
       const r = Reply.safeParse(raw);
@@ -145,7 +169,10 @@ export const quickStory = async (o: QuickOptions) => {
       }
       const s = validateScript(built.script, brief, budget);
       const p = validatePlan(built.plan, built.script);
-      const errors = [...s.errors, ...p.errors];
+      round++;
+      // quality issues go back for a fix too, but never fail the video on the last attempt
+      const soft = round <= REPAIRS ? quality(built.script, budget.targetWords, [...s.warnings, ...p.warnings]) : [];
+      const errors = [...s.errors, ...p.errors, ...soft];
       return errors.length ? { errors } : { errors: [], value: { script: built.script, plan: p.plan! } };
     },
   });

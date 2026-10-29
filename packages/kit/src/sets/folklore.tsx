@@ -30,7 +30,7 @@ import { BG_H, BG_Y, type SetDef } from './types';
 
 export { JEWEL } from './folkWorld';
 
-const TIME_PARAM = { time: 'day | dusk | night (default dusk)' };
+const TIME_PARAM = { time: 'day | dusk | night (default dusk)', moon: 'false hides the sun/moon (e.g. it was stolen)' };
 
 /** Fireflies only make sense after sunset; dust motes by day. */
 const folkFx = (groundY: number) => (v: { left: number; right: number; top: number; bottom: number }) => ({
@@ -200,7 +200,7 @@ const folkJungle: SetDef = {
   },
   elements: [],
   fx: folkFx(1330),
-  sky: ({ v }) => <FolkSky time={v.time} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -311,7 +311,7 @@ const folkVillage: SetDef = {
   },
   elements: [],
   fx: folkFx(1330),
-  sky: ({ v }) => <FolkSky time={v.time} body={[220, 700]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[220, 700]} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -443,7 +443,7 @@ const folkRiverGhat: SetDef = {
   anchors: { steps: [480, 1480], steps_left: [280, 1480], steps_right: [700, 1480], water_edge: [480, 1330] },
   elements: [],
   fx: folkFx(1440),
-  sky: ({ v }) => <FolkSky time={v.time} body={[760, 640]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[760, 640]} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -609,7 +609,7 @@ const folkTemple: SetDef = {
   },
   elements: [],
   fx: folkFx(1360),
-  sky: ({ v }) => <FolkSky time={v.time} body={[200, 640]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[200, 640]} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -718,7 +718,7 @@ const folkMountainPass: SetDef = {
   anchors: { path: [480, 1480], path_left: [300, 1480], path_right: [680, 1480], notch: [520, 1240] },
   elements: [],
   fx: folkFx(1360),
-  sky: ({ v }) => <FolkSky time={v.time} body={[860, 620]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[860, 620]} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -810,7 +810,7 @@ const folkSnowPeaks: SetDef = {
   anchors: { snowfield: [480, 1480], snowfield_left: [280, 1480], snowfield_right: [700, 1480] },
   elements: [],
   fx: folkFx(1360),
-  sky: ({ v }) => <FolkSky time={v.time} body={[180, 640]} clouds={false} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[180, 640]} clouds={false} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -920,7 +920,7 @@ const folkFields: SetDef = {
   anchors: { path: [480, 1480], path_left: [260, 1480], path_right: [720, 1480], far_hut: [880, 1150] },
   elements: [],
   fx: folkFx(1400),
-  sky: ({ v }) => <FolkSky time={v.time} body={[820, 660]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[820, 660]} />,
   far: ({ v }) => {
     const pal = folkPal(v);
     return (
@@ -1002,7 +1002,7 @@ const folkPalaceHall: SetDef = {
   anchors: { hall: [480, 1480], hall_left: [240, 1480], hall_right: [720, 1480], throne: [480, 1330] },
   elements: [],
   fx: folkFx(1360),
-  sky: ({ v }) => <FolkSky time={v.time} body={[480, 900]} />,
+  sky: ({ v }) => <FolkSky time={v.time} hidden={v.moon === false} body={[480, 900]} />,
   far: ({ v }) => {
     const view = useView();
     const { url } = useDefs();
