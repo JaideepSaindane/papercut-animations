@@ -1,0 +1,17 @@
+{
+  "title": "The Monkey's Paw, Part 1",
+  "hook": "Some wishes should never be made.",
+  "lines": [
+    { "id": "L01", "vo": "Some wishes should never be made.", "caption": "Some wishes should never be made.", "sourceIds": ["S1"], "beat": "hook" },
+    { "id": "L02", "vo": "A cold, wet night. The Whites sat by the fire.", "caption": "A cold, wet night.", "sourceIds": ["S1"], "beat": "setup" },
+    { "id": "L03", "vo": "Then came a knock at the door.", "caption": "Then came a knock at the door.", "sourceIds": ["S1"], "beat": "setup" },
+    { "id": "L04", "vo": "Sergeant-Major Morris, home from India.", "caption": "Sergeant-Major Morris, home from India.", "sourceIds": ["S1"], "beat": "rising" },
+    { "id": "L05", "vo": "He took a shrivelled monkey's paw from his pocket.", "caption": "He took a shrivelled monkey's paw.", "sourceIds": ["S1"], "beat": "rising" },
+    { "id": "L06", "vo": "Three men, he said, could each have three wishes.", "caption": "Three men. Three wishes each.", "sourceIds": ["S1"], "beat": "rising" },
+    { "id": "L07", "vo": "Then he threw it on the fire.", "caption": "Then he threw it on the fire.", "sourceIds": ["S1"], "beat": "turn" },
+    { "id": "L08", "vo": "Mr White snatched it back.", "caption": "Mr White snatched it back.", "sourceIds": ["S1"], "beat": "aftermath" },
+    { "id": "L09", "vo": "And wished for £200.", "caption": "And wished for £200.", "sourceIds": ["S1"], "beat": "cliffhanger" }
+  ],
+  "sources": [{ "id": "S1", "title": "W. W. Jacobs, \"The Monkey's Paw\" (1902) — Wikipedia summary", "url": "https://en.wikipedia.org/wiki/The_Monkey%27s_Paw" }],
+  "sensitivityNotes": ["Public-domain fiction; Herbert's death (part 2) is deliberately left for the next part and will be implied, not shown."]
+}

@@ -1,0 +1,47 @@
+{
+  "slug": "folk-animals",
+  "language": "en-IN",
+  "fps": 30,
+  "format": "vertical",
+  "style": "diorama",
+  "characters": [],
+  "shots": [
+    {
+      "id": "A1", "lineIds": ["L01"], "set": "folk_village", "setVariant": { "time": "day" },
+      "actors": [
+        { "ref": "elephant", "kind": "prop", "x": 300, "y": 1470, "scale": 0.8, "layer": "subject" },
+        { "ref": "cow", "kind": "prop", "x": 780, "y": 1500, "scale": 0.8, "layer": "subject" },
+        { "ref": "crow", "kind": "prop", "x": 560, "y": 1420, "scale": 0.8, "layer": "subject" },
+        { "ref": "birds_flock", "kind": "prop", "x": 520, "y": 640, "scale": 0.8, "layer": "mid" }
+      ],
+      "camera": { "move": "static" }, "caption": "elephant · cow · crow · flock", "durationInFrames": 60
+    },
+    {
+      "id": "A2", "lineIds": ["L02"], "set": "folk_jungle", "setVariant": { "time": "night" },
+      "actors": [
+        { "ref": "peacock", "kind": "prop", "x": 330, "y": 1480, "scale": 0.9, "layer": "subject", "params": { "fan": true } },
+        { "ref": "cobra", "kind": "prop", "x": 760, "y": 1490, "scale": 0.8, "layer": "subject" },
+        { "ref": "owl", "kind": "prop", "x": 800, "y": 1020, "scale": 0.6, "layer": "mid" }
+      ],
+      "camera": { "move": "static" }, "caption": "peacock · cobra · owl", "durationInFrames": 60
+    },
+    {
+      "id": "A3", "lineIds": ["L03"], "set": "folk_temple_courtyard", "setVariant": { "time": "dusk" },
+      "actors": [
+        { "ref": "peacock", "kind": "prop", "x": 300, "y": 1480, "scale": 0.9, "layer": "subject" },
+        { "ref": "cow", "kind": "prop", "x": 720, "y": 1480, "scale": 0.75, "layer": "subject", "flip": true },
+        { "ref": "diya", "kind": "prop", "x": 500, "y": 1520, "scale": 1, "layer": "subject" }
+      ],
+      "camera": { "move": "static" }, "caption": "peacock (closed) · cow facing right · diya", "durationInFrames": 60
+    },
+    {
+      "id": "A4", "lineIds": ["L04"], "set": "folk_snow_peaks", "setVariant": { "time": "dusk" },
+      "actors": [
+        { "ref": "pine_tree", "kind": "prop", "x": 250, "y": 1500, "scale": 1, "layer": "subject", "params": { "snow": true } },
+        { "ref": "palm_tree", "kind": "prop", "x": 620, "y": 1500, "scale": 1, "layer": "subject" },
+        { "ref": "tree_round", "kind": "prop", "x": 860, "y": 1500, "scale": 0.8, "layer": "subject" }
+      ],
+      "camera": { "move": "static" }, "caption": "pine · palm · round tree props", "durationInFrames": 60
+    }
+  ]
+}

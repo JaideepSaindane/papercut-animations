@@ -1,0 +1,4 @@
+#!/bin/sh
+# `pc` — runs the TypeScript CLI through tsx (installed at the repo root).
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+exec node --import tsx "$DIR/src/index.ts" "$@"

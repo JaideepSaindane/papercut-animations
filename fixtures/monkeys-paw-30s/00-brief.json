@@ -1,0 +1,12 @@
+{
+  "slug": "monkeys-paw-part-1-30s",
+  "topic": "The Monkey's Paw, part 1",
+  "series": "Horror Classics",
+  "part": 1,
+  "genre": "horror_classic",
+  "targetSeconds": 30,
+  "languages": ["en-IN"],
+  "formats": ["vertical", "horizontal"],
+  "tone": "measured, storyteller, ominous",
+  "constraints": ["end on a cliffhanger", "Phase 2 acceptance fixture: hand-written script and plan"]
+}

@@ -1,0 +1,116 @@
+{
+  "slug": "prototype-10s",
+  "language": "en-IN",
+  "fps": 30,
+  "format": "vertical",
+  "characters": [
+    {
+      "id": "dahmer_1978",
+      "displayName": "Jeffrey Dahmer (1978)",
+      "base": "teen_m",
+      "skin": "skin2",
+      "hair": { "style": "side_part", "color": "blond" },
+      "face": { "glasses": "large_square", "facialHair": "none", "brows": "flat" },
+      "outfit": { "top": "button_shirt", "topColor": "olive", "bottom": "jeans", "bottomColor": "denim" },
+      "defaultExpression": "vacant"
+    },
+    {
+      "id": "hicks_1978",
+      "displayName": "Steven Hicks",
+      "base": "teen_m",
+      "skin": "skin3",
+      "hair": { "style": "long_straight", "color": "brown" },
+      "face": { "glasses": "none", "facialHair": "none", "brows": "flat" },
+      "outfit": { "top": "tshirt", "topColor": "cream", "bottom": "jeans", "bottomColor": "denim" },
+      "defaultExpression": "neutral"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "lineIds": ["L01"],
+      "set": "house_ext_ranch",
+      "palette": "dusk",
+      "setVariant": { "pineDrift": 70 },
+      "actors": [{ "ref": "mailbox", "kind": "prop", "x": 214, "y": 1760, "layer": "fg", "landscape": { "x": -170, "y": 1560 } }],
+      "camera": { "move": "push_in", "amount": 0.08, "fgParallax": 1.75 },
+      "fx": ["fireflies"],
+      "caption": "June 1978. Ohio.",
+      "captionTilt": -1.2,
+      "durationInFrames": 60
+    },
+    {
+      "id": "S02",
+      "lineIds": ["L02"],
+      "set": "living_room_70s",
+      "palette": "interiorWarm",
+      "actors": [
+        { "ref": "dahmer_1978", "kind": "character", "framing": "waist", "x": 540, "y": 1400, "pose": "idle", "expression": "vacant" }
+      ],
+      "actions": [
+        { "target": "dahmer_1978", "action": "head_turn", "at": 0, "dur": 0.83, "params": { "from": -4, "to": 3 } },
+        { "target": "dahmer_1978", "action": "arm_swing", "at": 0, "dur": 1, "params": { "amp": 2, "speed": 2.5 } },
+        { "target": "dahmer_1978", "action": "blink", "at": 0.525, "dur": 0.075 }
+      ],
+      "camera": { "move": "push_in", "amount": 0.07 },
+      "caption": "Jeffrey Dahmer, 18, home alone.",
+      "captionTilt": 1,
+      "durationInFrames": 60
+    },
+    {
+      "id": "S03",
+      "lineIds": ["L03"],
+      "set": "road_rural",
+      "palette": "dusk",
+      "actors": [
+        { "ref": "car_70s_sedan", "kind": "prop", "x": 302, "y": 1442, "scale": 1.4, "layer": "mid", "params": { "color": "#2f5f52" } },
+        { "ref": "hicks_1978", "kind": "character", "framing": "full", "x": 800, "y": 1448, "pose": "thumb_out", "layer": "subject" }
+      ],
+      "actions": [
+        { "target": "car_70s_sedan", "action": "drive_in", "at": 0, "dur": 0.62, "params": { "fromX": -602 } },
+        { "target": "hicks_1978", "action": "thumb_out_wave", "at": 0, "dur": 0.62 }
+      ],
+      "camera": { "move": "push_in_pan_left", "amount": 0.05, "pan": 40 },
+      "caption": "He picked up a hitchhiker, Steven Hicks.",
+      "captionTilt": -0.8,
+      "durationInFrames": 60
+    },
+    {
+      "id": "S04",
+      "lineIds": ["L04"],
+      "set": "apartment_interior",
+      "palette": "interiorDark",
+      "actors": [
+        { "ref": "chair", "kind": "prop", "x": 745, "y": 1440 },
+        { "ref": "table", "kind": "prop", "x": 540, "y": 1300 },
+        { "ref": "beer_bottle", "kind": "prop", "x": 400, "y": 1300 },
+        { "ref": "beer_bottle_2", "kind": "prop", "x": 600, "y": 1300 },
+        { "ref": "lamp", "kind": "prop", "x": 540, "y": -50, "params": { "prop": "lamp_hanging", "cord": 880 } }
+      ],
+      "actions": [
+        { "target": "lamp", "action": "swing", "at": 0, "dur": 1, "params": { "angle": 14, "speed": 3.2 } },
+        { "target": "lamp", "action": "flicker", "at": 0.45, "dur": 0.35, "params": { "settle": 0.3 } },
+        { "target": "beer_bottle_2", "action": "fall_over", "at": 0.42, "dur": 0.13, "params": { "angle": 90, "direction": "right" } },
+        { "target": "chair", "action": "fall_over", "at": 0.42, "dur": 0.13, "params": { "angle": 80, "direction": "right" } },
+        { "target": "camera", "action": "shake", "at": 0.42, "dur": 0.18, "params": { "amp": 14 } }
+      ],
+      "camera": { "move": "push_in", "amount": 0.06 },
+      "fx": [{ "id": "red_tint", "at": 0.45, "dur": 0.3 }],
+      "caption": "When Hicks tried to leave, Dahmer killed him.",
+      "captionTilt": 1.1,
+      "durationInFrames": 60
+    },
+    {
+      "id": "S05",
+      "lineIds": ["L05"],
+      "set": "woods_night",
+      "palette": "night",
+      "actors": [{ "ref": "dirt_mound", "kind": "prop", "x": 550, "y": 1430, "layer": "mid", "params": { "withShovel": true } }],
+      "camera": { "move": "push_in", "amount": 0.09, "fgParallax": 1.6 },
+      "fx": ["fireflies", { "id": "fade_black_end", "at": 0.82 }],
+      "caption": "No one would know for 13 years.",
+      "captionTilt": -1,
+      "durationInFrames": 60
+    }
+  ]
+}

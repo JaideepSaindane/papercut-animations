@@ -1,0 +1,24 @@
+[
+  {
+    "id": "placeholder_dark_drone",
+    "file": "placeholder_dark_drone.wav",
+    "mood": [
+      "dark",
+      "tense",
+      "ominous"
+    ],
+    "loopable": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "placeholder_melancholy_pad",
+    "file": "placeholder_melancholy_pad.wav",
+    "mood": [
+      "melancholy",
+      "sad",
+      "reflective"
+    ],
+    "loopable": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  }
+]

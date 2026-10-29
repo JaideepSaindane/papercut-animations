@@ -1,0 +1,60 @@
+{
+  "slug": "folklore-proof",
+  "language": "en-IN",
+  "fps": 30,
+  "format": "vertical",
+  "style": "diorama",
+  "characters": [
+    {
+      "id": "meera",
+      "displayName": "Village girl",
+      "base": "teen_f",
+      "skin": "skin3",
+      "hair": { "style": "braid", "color": "black" },
+      "face": { "glasses": "none", "facialHair": "none", "brows": "arched" },
+      "outfit": { "top": "choli", "topColor": "#d4532b", "bottom": "ghagra", "bottomColor": "#2c2a6a" },
+      "defaultExpression": "neutral"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "lineIds": ["L01"],
+      "set": "folk_jungle",
+      "actors": [
+        { "ref": "tiger", "kind": "prop", "x": 770, "y": 1470, "scale": 0.8, "layer": "subject" },
+        { "ref": "meera", "kind": "character", "framing": "full", "x": 290, "y": 1480, "scale": 1.5, "pose": "hold_out", "params": { "holding": "lantern", "holdScale": 1.7 } }
+      ],
+      "actions": [
+        { "target": "meera", "action": "enter_from_left", "at": 0, "dur": 0.45 },
+        { "target": "meera", "action": "walk_in_place", "at": 0, "dur": 0.45 },
+        { "target": "meera", "action": "blink", "at": 0.7, "dur": 0.06 },
+        { "target": "tiger", "action": "head_turn", "at": 0.5, "dur": 0.3, "params": { "from": 0, "to": -8 } }
+      ],
+      "camera": { "move": "push_in", "amount": 0.05 },
+      "fx": ["fireflies"],
+      "caption": "Long ago, at the edge of the jungle…",
+      "captionTilt": -1,
+      "durationInFrames": 120
+    },
+    {
+      "id": "S02",
+      "lineIds": ["L02"],
+      "set": "folk_jungle",
+      "actors": [
+        { "ref": "tiger", "kind": "prop", "x": 760, "y": 1470, "scale": 0.8, "layer": "subject" },
+        { "ref": "meera", "kind": "character", "framing": "full", "x": 340, "y": 1480, "scale": 1.5, "pose": "hold_out", "expression": "worried", "params": { "holding": "lantern", "holdScale": 1.7 } }
+      ],
+      "actions": [
+        { "target": "tiger", "action": "nod", "at": 0.3, "dur": 0.35, "params": { "amp": 14, "count": 2 } },
+        { "target": "meera", "action": "head_tilt", "at": 0.15, "dur": 0.3, "params": { "angle": 5 } },
+        { "target": "meera", "action": "blink", "at": 0.6, "dur": 0.06 }
+      ],
+      "camera": { "move": "push_in", "amount": 0.1, "focus": [560, 1300] },
+      "fx": ["fireflies", { "id": "fade_black_end", "at": 0.85 }],
+      "caption": "…a girl with a lantern met a tiger.",
+      "captionTilt": 1,
+      "durationInFrames": 120
+    }
+  ]
+}

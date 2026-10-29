@@ -1,0 +1,44 @@
+[
+  {
+    "id": "thud",
+    "file": "placeholder_thud.wav",
+    "loop": false,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "door_knock",
+    "file": "placeholder_door_knock.wav",
+    "loop": false,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "paper_slide",
+    "file": "placeholder_paper_slide.wav",
+    "loop": false,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "light_buzz",
+    "file": "placeholder_light_buzz.wav",
+    "loop": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "wind_loop",
+    "file": "placeholder_wind_loop.wav",
+    "loop": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "clock_tick",
+    "file": "placeholder_clock_tick.wav",
+    "loop": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  },
+  {
+    "id": "fire_crackle_loop",
+    "file": "placeholder_fire_crackle_loop.wav",
+    "loop": true,
+    "license": "original placeholder synthesised by `pc assets placeholders` (free to use; replace with licensed audio)"
+  }
+]

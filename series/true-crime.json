@@ -1,0 +1,17 @@
+{
+  "name": "True Crime",
+  "voice": {
+    "model": "bulbul:v3",
+    "speaker": "varun",
+    "pace": 0.95,
+    "temperature": 0.35,
+    "sampleRate": 48000,
+    "systemVoice": "Rishi",
+    "respell": { "Dahmer": "Dah-mer" }
+  },
+  "voices": {
+    "hi-IN": { "speaker": "aditya" }
+  },
+  "music": { "moods": ["dark", "tense"], "volume": 0.16, "duckTo": 0.06 },
+  "subtitles": "caption"
+}

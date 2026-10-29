@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "studio",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "port": 3100
+    },
+    {
+      "name": "costs",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "pnpm -s pc costs --page >/dev/null && python3 -m http.server 4318 --bind 127.0.0.1 --directory data"],
+      "port": 4318
+    }
+  ]
+}

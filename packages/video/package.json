@@ -1,0 +1,29 @@
+{
+  "name": "@papercut/video",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "node scripts/sync-stories.mjs && remotion studio src/index.ts --port 3100",
+    "render:proto": "remotion render src/index.ts Prototype10s out/prototype10s.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
+    "stills:proto": "node scripts/stills.mjs proto",
+    "stills:gallery": "node scripts/stills.mjs gallery",
+    "test:visual": "node scripts/snapshots.mjs",
+    "render:proto:landscape": "remotion render src/index.ts Prototype10sLandscape out/prototype10s-landscape.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p"
+  },
+  "dependencies": {
+    "@papercut/kit": "workspace:*",
+    "@papercut/schema": "workspace:*",
+    "@remotion/cli": "4.0.539",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "@types/react": "^19.2.0",
+    "pixelmatch": "8.0.0",
+    "pngjs": "7.0.0"
+  }
+}

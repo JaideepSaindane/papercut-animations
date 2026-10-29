@@ -1,0 +1,2359 @@
+{
+  "formats": {
+    "vertical": {
+      "width": 1080,
+      "height": 1920,
+      "worldView": {
+        "x": 0,
+        "y": 0,
+        "w": 1080,
+        "h": 1920
+      }
+    },
+    "horizontal": {
+      "width": 1920,
+      "height": 1080,
+      "worldView": {
+        "x": -420,
+        "y": 410,
+        "w": 1920,
+        "h": 1080
+      }
+    }
+  },
+  "sets": [
+    {
+      "id": "house_ext_ranch",
+      "description": "Single-storey suburban ranch house across a lawn, low sun or moon behind, pines framing the edges.",
+      "palettes": [
+        "dusk",
+        "night",
+        "day"
+      ],
+      "params": {
+        "lit": "boolean windows lit (default true)",
+        "pineDrift": "number px the fg pines drift outward on push (default 70)",
+        "pines": "boolean (default true)"
+      },
+      "anchors": {
+        "lawn_y": [
+          540,
+          1450
+        ],
+        "door": [
+          650,
+          1300
+        ],
+        "driveway": [
+          860,
+          1600
+        ]
+      },
+      "elements": [
+        "sun",
+        "moon",
+        "house_windows"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "road_rural",
+      "description": "Two-lane rural road seen from the shoulder: fields, hedges and telephone poles behind.",
+      "palettes": [
+        "dusk",
+        "day",
+        "night"
+      ],
+      "params": {},
+      "anchors": {
+        "shoulder_y": [
+          800,
+          1448
+        ],
+        "road_y": [
+          540,
+          1440
+        ],
+        "far_lane_y": [
+          540,
+          1350
+        ]
+      },
+      "elements": [
+        "sun",
+        "moon"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "woods_night",
+      "description": "Dense woods at night: blurred trunks, a moon through the trees, ferns framing the bottom corners.",
+      "palettes": [
+        "night"
+      ],
+      "params": {
+        "ferns": "boolean (default true)",
+        "moonX": "number (default 250)"
+      },
+      "anchors": {
+        "clearing": [
+          550,
+          1430
+        ],
+        "ground_y": [
+          540,
+          1380
+        ]
+      },
+      "elements": [
+        "moon"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "city_street_night",
+      "description": "Night city sidewalk: brick storefronts with lit windows and a neon sign, skyline behind.",
+      "palettes": [
+        "night"
+      ],
+      "params": {
+        "sign": "string neon sign text (default BAR)"
+      },
+      "anchors": {
+        "sidewalk_y": [
+          540,
+          1440
+        ],
+        "doorway": [
+          740,
+          1320
+        ],
+        "curb_y": [
+          540,
+          1470
+        ]
+      },
+      "elements": [
+        "neon"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "living_room_70s",
+      "description": "1970s living room: striped wallpaper, curtained window, framed picture, floor lamp glow. Blurred backdrop for waist/closeup shots.",
+      "palettes": [
+        "interiorWarm",
+        "interiorDark"
+      ],
+      "params": {},
+      "anchors": {
+        "centre": [
+          540,
+          1400
+        ],
+        "floor_y": [
+          540,
+          1340
+        ],
+        "window": [
+          215,
+          710
+        ],
+        "lamp": [
+          930,
+          760
+        ]
+      },
+      "elements": [
+        "lamp",
+        "window_light"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "apartment_interior",
+      "description": "Bare room: back door ajar with a moonlit gap, small window with the moon, dark floor. Pair with table/chair/lamp_hanging props.",
+      "palettes": [
+        "interiorDark",
+        "interiorWarm"
+      ],
+      "params": {},
+      "anchors": {
+        "floor_y": [
+          540,
+          1220
+        ],
+        "table": [
+          540,
+          1300
+        ],
+        "lamp_hang": [
+          540,
+          -50
+        ],
+        "door": [
+          510,
+          1220
+        ]
+      },
+      "elements": [
+        "door_gap",
+        "window_light"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "kitchen",
+      "description": "Small 70s kitchen: tiled splashback, wall cabinets, window over the sink, counter, checkered floor.",
+      "palettes": [
+        "interiorWarm",
+        "day",
+        "interiorDark"
+      ],
+      "params": {},
+      "anchors": {
+        "counter_top": [
+          540,
+          1180
+        ],
+        "floor_y": [
+          540,
+          1420
+        ],
+        "window": [
+          540,
+          760
+        ]
+      },
+      "elements": [
+        "window_light",
+        "lamp"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "police_interview_room",
+      "description": "Bare interview room: cinder-block wall, one-way mirror, steel door, bare bulb overhead, metal table.",
+      "palettes": [
+        "police"
+      ],
+      "params": {
+        "table": "boolean metal table (default true)"
+      },
+      "anchors": {
+        "table_top": [
+          540,
+          1300
+        ],
+        "chair_left": [
+          240,
+          1600
+        ],
+        "chair_right": [
+          840,
+          1600
+        ],
+        "floor_y": [
+          540,
+          1260
+        ]
+      },
+      "elements": [
+        "bulb",
+        "mirror"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "victorian_parlour",
+      "description": "Victorian parlour (horror classics, The Monkey's Paw): damask wallpaper, fireplace with live fire glow, oval portrait, heavy curtains.",
+      "palettes": [
+        "parlour",
+        "interiorWarm",
+        "interiorDark"
+      ],
+      "params": {
+        "fire": "boolean fire lit (default true)"
+      },
+      "anchors": {
+        "mantel_top": [
+          540,
+          1020
+        ],
+        "hearth": [
+          540,
+          1300
+        ],
+        "armchair_left": [
+          180,
+          1500
+        ],
+        "floor_y": [
+          540,
+          1340
+        ]
+      },
+      "elements": [
+        "fire",
+        "window_light"
+      ],
+      "pack": "classic",
+      "style": "diecut"
+    },
+    {
+      "id": "folk_jungle",
+      "description": "Indian folklore: a jungle clearing — jewel sky (sun, crescent or full moon by time), layered patterned hills, a far treeline, an ochre clearing to stand in, a great patterned banyan on the right, ferns and grass framing the bottom.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "clearing": [
+          480,
+          1480
+        ],
+        "clearing_left": [
+          280,
+          1480
+        ],
+        "clearing_right": [
+          680,
+          1480
+        ],
+        "banyan": [
+          900,
+          1330
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_village",
+      "description": "Indian folklore: a village courtyard — thatched mud huts with Madhubani bands (doors glow after dark), a stone well with a pot, a rangoli on the beaten-earth ground, palms and a treeline behind.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "courtyard": [
+          480,
+          1480
+        ],
+        "courtyard_left": [
+          260,
+          1480
+        ],
+        "courtyard_right": [
+          720,
+          1480
+        ],
+        "well": [
+          540,
+          1360
+        ],
+        "hut_door": [
+          930,
+          1320
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_river_ghat",
+      "description": "Indian folklore: stone steps (ghat) down to a wide river — far bank with hills and treeline, boats rocking on the water, a small temple spire on the left, a domed chhatri on the right; floating diyas glow at dusk and night, the sun or moon reflects in the water.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "steps": [
+          480,
+          1480
+        ],
+        "steps_left": [
+          280,
+          1480
+        ],
+        "steps_right": [
+          700,
+          1480
+        ],
+        "water_edge": [
+          480,
+          1330
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_temple_courtyard",
+      "description": "Indian folklore: a village temple courtyard — a tall banded shikhara spire with a pennant, a pillared mandapa porch with a swinging bell, a sacred peepal tree on a platform tied with red threads, flagstone floor, diyas lit after dark.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "courtyard": [
+          480,
+          1480
+        ],
+        "courtyard_left": [
+          260,
+          1480
+        ],
+        "courtyard_right": [
+          720,
+          1480
+        ],
+        "porch": [
+          760,
+          1360
+        ],
+        "tree": [
+          110,
+          1400
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_mountain_pass",
+      "description": "Indian folklore / world: a Himalayan mountain pass — far snow-tipped ranges, nearer rocky slopes, a winding ochre path climbing to a notch, pines on either side and prayer flags fluttering across the path.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "path": [
+          480,
+          1480
+        ],
+        "path_left": [
+          300,
+          1480
+        ],
+        "path_right": [
+          680,
+          1480
+        ],
+        "notch": [
+          520,
+          1240
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_snow_peaks",
+      "description": "World / folklore: high snow-capped peaks above a snowfield — great white-capped mountains, snow-laden pines, soft snow drifts to stand on. Cold and quiet; pairs well with the fog fx.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "snowfield": [
+          480,
+          1480
+        ],
+        "snowfield_left": [
+          280,
+          1480
+        ],
+        "snowfield_right": [
+          700,
+          1480
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_fields",
+      "description": "Indian folklore / world: open farmland — rows of mustard (golden by day) running to the horizon, a hut and palms far off, hills behind, a dirt path in front to stand on.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "path": [
+          480,
+          1480
+        ],
+        "path_left": [
+          260,
+          1480
+        ],
+        "path_right": [
+          720,
+          1480
+        ],
+        "far_hut": [
+          880,
+          1150
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "folk_palace_hall",
+      "description": "Indian folklore / history: a Rajput palace hall — rose-red walls with cusped arch windows showing the sky outside (time of day), gilded pillars, a patterned marble floor, hanging brass lamps that glow at dusk and night.",
+      "palettes": [
+        "folk"
+      ],
+      "params": {
+        "time": "day | dusk | night (default dusk)"
+      },
+      "anchors": {
+        "hall": [
+          480,
+          1480
+        ],
+        "hall_left": [
+          240,
+          1480
+        ],
+        "hall_right": [
+          720,
+          1480
+        ],
+        "throne": [
+          480,
+          1330
+        ]
+      },
+      "elements": [],
+      "pack": "folklore",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "dusk"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_chawl_corridor",
+      "description": "Indian true crime/drama: the shared corridor of a Mumbai chawl — a row of numbered doors on a pastel wall, a clothesline of drying clothes overhead, steel buckets, tube lights glowing at night, a window to the street at one end.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "corridor": [
+          480,
+          1480
+        ],
+        "corridor_left": [
+          260,
+          1480
+        ],
+        "corridor_right": [
+          720,
+          1480
+        ],
+        "door_mid": [
+          480,
+          1300
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_bungalow",
+      "description": "Indian true crime/drama: an old colonial-era bungalow behind a compound wall — whitewashed walls, a red-tiled sloping roof, a pillared verandah, shuttered windows (lit at night), a gulmohar tree and a gravel driveway to stand on.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "driveway": [
+          480,
+          1480
+        ],
+        "driveway_left": [
+          260,
+          1480
+        ],
+        "driveway_right": [
+          720,
+          1480
+        ],
+        "verandah": [
+          540,
+          1220
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_haveli_courtyard",
+      "description": "Indian drama/true crime: the inner courtyard of an old family haveli — faded ochre walls, a row of scalloped arches below a carved wooden balcony (jharokha), a heavy studded door, a tulsi planter in the middle of the stone floor. Lamps glow at night.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "courtyard": [
+          480,
+          1480
+        ],
+        "courtyard_left": [
+          260,
+          1480
+        ],
+        "courtyard_right": [
+          720,
+          1480
+        ],
+        "door": [
+          880,
+          1300
+        ],
+        "tulsi": [
+          540,
+          1360
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_city_street",
+      "description": "Indian true crime/drama: a busy city street (Mumbai/Delhi) — a row of small shops with rolling shutters and plain coloured signboards, a tea stall awning, tangled overhead wires, a street lamp (lit at night), apartment blocks behind, a pavement to stand on.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "pavement": [
+          480,
+          1480
+        ],
+        "pavement_left": [
+          260,
+          1480
+        ],
+        "pavement_right": [
+          720,
+          1480
+        ],
+        "shop": [
+          560,
+          1300
+        ],
+        "lamp": [
+          960,
+          1320
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_police_station",
+      "description": "Indian true crime: a district police station (thana) — two-tone green-and-cream wall, a wooden desk piled with case files, a steel almirah, a notice board, a ceiling fan and tube light, a barred lockup on the right.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "desk": [
+          380,
+          1480
+        ],
+        "front": [
+          480,
+          1480
+        ],
+        "lockup": [
+          920,
+          1400
+        ],
+        "left": [
+          200,
+          1480
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_courtroom",
+      "description": "Indian true crime/drama: a district courtroom — dark wood panelling, the judge's raised bench in the middle under a wall clock, a witness box on the left, a wooden railing, ceiling fans, tall windows.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "floor": [
+          480,
+          1480
+        ],
+        "floor_left": [
+          240,
+          1480
+        ],
+        "floor_right": [
+          720,
+          1480
+        ],
+        "bench": [
+          540,
+          1120
+        ],
+        "witness_box": [
+          140,
+          1300
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_newsroom",
+      "description": "Indian true crime/drama: a newspaper newsroom — rows of desks with old monitors and typewriters, stacks of newspapers, a wall clock, pinned front pages on a board, windows onto the city (lit skyline at night).",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "desk": [
+          480,
+          1480
+        ],
+        "desk_left": [
+          240,
+          1480
+        ],
+        "desk_right": [
+          720,
+          1480
+        ],
+        "board": [
+          300,
+          1300
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    },
+    {
+      "id": "crime_village_road",
+      "description": "Indian true crime/drama: a lonely village road — a dusty road running into flat fields, a white-and-yellow milestone, a lone neem tree, a roadside tea stall with a bench, electric poles receding into the distance. Moonlit at night.",
+      "palettes": [
+        "crime"
+      ],
+      "params": {
+        "time": "day | night (default night)"
+      },
+      "anchors": {
+        "road": [
+          480,
+          1480
+        ],
+        "road_left": [
+          260,
+          1480
+        ],
+        "road_right": [
+          720,
+          1480
+        ],
+        "stall": [
+          880,
+          1300
+        ],
+        "milestone": [
+          200,
+          1320
+        ]
+      },
+      "elements": [],
+      "pack": "crime",
+      "style": "diorama",
+      "variants": [
+        {
+          "time": "day"
+        },
+        {
+          "time": "night"
+        }
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "id": "folklore",
+      "name": "Indian folklore",
+      "description": "Village tales, jungle fables, river and temple legends, palace stories. Diorama style with the Gond/Madhubani folk-pattern skin; every set comes in day, dusk and night (setVariant.time).",
+      "style": "diorama",
+      "motifs": [
+        "Gond dot-and-line fills",
+        "Madhubani zigzag bands",
+        "jewel palette: indigo, peacock, marigold, vermilion",
+        "diyas and lanterns after dark"
+      ],
+      "props": [
+        "lantern",
+        "tiger",
+        "elephant",
+        "cow",
+        "dog",
+        "horse",
+        "peacock",
+        "owl",
+        "crow",
+        "cobra",
+        "birds_flock",
+        "tree_round",
+        "palm_tree",
+        "pine_tree",
+        "diya"
+      ],
+      "sets": [
+        "folk_jungle",
+        "folk_village",
+        "folk_river_ghat",
+        "folk_temple_courtyard",
+        "folk_mountain_pass",
+        "folk_snow_peaks",
+        "folk_fields",
+        "folk_palace_hall"
+      ]
+    },
+    {
+      "id": "crime",
+      "name": "Indian true crime + drama",
+      "description": "Everyday Indian places for true crime and family drama: chawl, bungalow, haveli, city street, police station, courtroom, newsroom, village road. Diorama style, muted and grounded (no folk patterns); every set comes in day and night (setVariant.time). Costumes: kurta, sari, dhoti, sherwani, police khaki, turban, veil, police cap.",
+      "style": "diorama",
+      "motifs": [
+        "tube lights and ceiling fans",
+        "case files and steel almirahs",
+        "lit windows at night",
+        "red only as a tint at the turn"
+      ],
+      "props": [
+        "diya",
+        "crow",
+        "dog",
+        "birds_flock",
+        "tree_round"
+      ],
+      "sets": [
+        "crime_chawl_corridor",
+        "crime_bungalow",
+        "crime_haveli_courtyard",
+        "crime_city_street",
+        "crime_police_station",
+        "crime_courtroom",
+        "crime_newsroom",
+        "crime_village_road"
+      ]
+    },
+    {
+      "id": "classic",
+      "name": "Classic die-cut (true crime, horror)",
+      "description": "The original muted die-cut puppet style used by the true-crime and horror-classics series.",
+      "style": "diecut",
+      "motifs": [
+        "white die-cut borders",
+        "ink outlines",
+        "muted 1970s palette",
+        "red only as a tint at the turn"
+      ],
+      "props": [],
+      "sets": [
+        "house_ext_ranch",
+        "road_rural",
+        "woods_night",
+        "city_street_night",
+        "living_room_70s",
+        "apartment_interior",
+        "kitchen",
+        "police_interview_room",
+        "victorian_parlour"
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "car_70s_sedan",
+      "description": "1970s four-door sedan, side view facing right, wheels spin with drive_in/drive_out.",
+      "origin": "bottom centre of wheels",
+      "params": {
+        "color": "hex (default #2f5f52)"
+      },
+      "size": [
+        610,
+        210
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "car_police",
+      "description": "Black-and-white police cruiser with light bar, side view facing right.",
+      "origin": "bottom centre of wheels",
+      "params": {},
+      "size": [
+        610,
+        210
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "beer_bottle",
+      "description": "Brown beer bottle with cream label.",
+      "origin": "base centre",
+      "params": {},
+      "size": [
+        64,
+        260
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "glass",
+      "description": "Tumbler glass, half full.",
+      "origin": "base centre",
+      "params": {
+        "fill": "hex liquid colour (default amber)"
+      },
+      "size": [
+        68,
+        104
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "table",
+      "description": "Plain wooden table, side-on. Things placed on it sit at its origin height.",
+      "origin": "centre of the table top surface",
+      "params": {
+        "width": "number (default 860)"
+      },
+      "size": [
+        880,
+        760
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "chair",
+      "description": "Wooden kitchen chair, side-on, back on the left.",
+      "origin": "base centre (floor)",
+      "params": {},
+      "size": [
+        180,
+        490
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "lamp_hanging",
+      "description": "Ceiling lamp on a cord with a light cone. Responds to swing and flicker.",
+      "origin": "hang point at the ceiling",
+      "params": {
+        "cord": "number (px, default 880)",
+        "color": "hex shade colour",
+        "cone": "boolean (default true)"
+      },
+      "size": [
+        460,
+        1380
+      ],
+      "pivots": [
+        "hang"
+      ]
+    },
+    {
+      "id": "lamp_floor",
+      "description": "Standing floor lamp with fabric shade and warm glow. Responds to flicker.",
+      "origin": "base centre",
+      "params": {},
+      "size": [
+        400,
+        790
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "phone_rotary",
+      "description": "Rotary telephone with handset.",
+      "origin": "base centre",
+      "params": {
+        "color": "hex (default #2c2a28)"
+      },
+      "size": [
+        220,
+        154
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "newspaper",
+      "description": "Folded newspaper with masthead and a big headline (text param). Good with slam.",
+      "origin": "bottom centre",
+      "params": {
+        "headline": "string (≤ 30 chars)",
+        "masthead": "string (default THE DAILY HERALD)",
+        "date": "string"
+      },
+      "size": [
+        480,
+        334
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "polaroid",
+      "description": "Instant photo with a hand-written caption (text param).",
+      "origin": "bottom centre",
+      "params": {
+        "caption": "string",
+        "tint": "hex photo colour"
+      },
+      "size": [
+        230,
+        280
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "evidence_bag",
+      "description": "Clear evidence bag with red label strip.",
+      "origin": "bottom centre",
+      "params": {
+        "label": "string (default EVIDENCE)"
+      },
+      "size": [
+        250,
+        315
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "case_file",
+      "description": "Manila case folder with tab and typed label.",
+      "origin": "bottom centre",
+      "params": {
+        "label": "string"
+      },
+      "size": [
+        370,
+        275
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "suitcase",
+      "description": "Old leather suitcase with handle and straps.",
+      "origin": "base centre",
+      "params": {
+        "color": "hex (default #6b4428)"
+      },
+      "size": [
+        330,
+        264
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "luggage_tag",
+      "description": "Paper luggage tag on a string (text param).",
+      "origin": "bottom centre",
+      "params": {
+        "text": "string"
+      },
+      "size": [
+        180,
+        174
+      ],
+      "pivots": [
+        "hang"
+      ]
+    },
+    {
+      "id": "letter",
+      "description": "Hand-written letter, one page.",
+      "origin": "bottom centre",
+      "params": {
+        "text": "string (first line, optional)"
+      },
+      "size": [
+        250,
+        335
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "envelope",
+      "description": "Sealed envelope with stamp.",
+      "origin": "bottom centre",
+      "params": {},
+      "size": [
+        330,
+        220
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "calendar",
+      "description": "Wall calendar page showing a month and day.",
+      "origin": "bottom centre",
+      "params": {
+        "month": "string (e.g. JUNE)",
+        "day": "string/number",
+        "year": "string"
+      },
+      "size": [
+        260,
+        324
+      ],
+      "pivots": [
+        "base_left",
+        "base_right",
+        "hang"
+      ]
+    },
+    {
+      "id": "clock",
+      "description": "Round wall clock showing a time.",
+      "origin": "centre of the face",
+      "params": {
+        "time": "HH:MM (default 11:45)"
+      },
+      "size": [
+        250,
+        250
+      ],
+      "pivots": [
+        "hang"
+      ]
+    },
+    {
+      "id": "tv_crt",
+      "description": "Wood-cabinet CRT television; the screen glows (responds to flicker).",
+      "origin": "base centre",
+      "params": {
+        "screen": "hex screen colour (default cold blue)"
+      },
+      "size": [
+        340,
+        334
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "radio",
+      "description": "Arched wooden table radio with dial.",
+      "origin": "base centre",
+      "params": {},
+      "size": [
+        250,
+        254
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "door",
+      "description": "Panelled interior door; opens with door_open (hinge on the left).",
+      "origin": "base centre",
+      "params": {
+        "color": "hex",
+        "open": "number 0..1 (initial)"
+      },
+      "size": [
+        300,
+        564
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "window",
+      "description": "Sash window; pane colour = what is outside; lit windows glow (light).",
+      "origin": "bottom centre of the frame",
+      "params": {
+        "outside": "hex (default night blue)",
+        "lit": "boolean",
+        "moon": "boolean"
+      },
+      "size": [
+        250,
+        294
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "map_pin_board",
+      "description": "Corkboard with photos, pins and red string (investigation board).",
+      "origin": "bottom centre",
+      "params": {},
+      "size": [
+        530,
+        374
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "handcuffs",
+      "description": "Pair of steel handcuffs.",
+      "origin": "bottom centre",
+      "params": {},
+      "size": [
+        240,
+        94
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "badge",
+      "description": "Police badge (shield).",
+      "origin": "bottom centre",
+      "params": {},
+      "size": [
+        160,
+        194
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "key",
+      "description": "Old brass key.",
+      "origin": "bottom centre",
+      "params": {},
+      "size": [
+        220,
+        54
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "monkey_paw",
+      "description": "A shrivelled monkey's paw with three curled fingers (The Monkey's Paw).",
+      "origin": "wrist (bottom centre)",
+      "params": {},
+      "size": [
+        180,
+        234
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "mailbox",
+      "description": "Rural mailbox on a post with a red flag.",
+      "origin": "base of the post",
+      "params": {},
+      "size": [
+        140,
+        404
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "pine_tree",
+      "description": "Layered mountain pine; params.snow lays snow on each tier (diorama style).",
+      "origin": "base of the trunk",
+      "params": {
+        "color": "canopy colour (#hex), default by time of day",
+        "height": "px (default 480)",
+        "snow": "boolean"
+      },
+      "size": [
+        420,
+        510
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "bush",
+      "description": "Rounded bush.",
+      "origin": "base centre",
+      "params": {
+        "color": "hex"
+      },
+      "size": [
+        320,
+        174
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "grass_tuft",
+      "description": "Spiky grass tuft for foregrounds.",
+      "origin": "base centre",
+      "params": {
+        "color": "hex"
+      },
+      "size": [
+        140,
+        129
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "fern",
+      "description": "Cluster of fern fronds for foreground framing (flip leans them the other way).",
+      "origin": "base centre",
+      "params": {
+        "seed": "number",
+        "size": "number scale (default 1)"
+      },
+      "size": [
+        300,
+        504
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "moon",
+      "description": "Full moon with soft glow.",
+      "origin": "centre",
+      "params": {
+        "r": "number radius (default 70)"
+      },
+      "size": [
+        400,
+        400
+      ],
+      "pivots": []
+    },
+    {
+      "id": "sun",
+      "description": "Low sun disc with warm glow.",
+      "origin": "centre",
+      "params": {
+        "r": "number radius (default 95)"
+      },
+      "size": [
+        540,
+        540
+      ],
+      "pivots": []
+    },
+    {
+      "id": "streetlight",
+      "description": "Curved street lamp with a light pool. Responds to flicker.",
+      "origin": "base of the pole",
+      "params": {},
+      "size": [
+        340,
+        924
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "fence",
+      "description": "White picket fence section.",
+      "origin": "base centre",
+      "params": {
+        "width": "number (default 600)",
+        "color": "hex (default #e3dccb)"
+      },
+      "size": [
+        620,
+        234
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "shovel",
+      "description": "Long-handled shovel, planted at a lean (blade buried).",
+      "origin": "where the blade enters the ground",
+      "params": {
+        "lean": "number degrees (default -16)"
+      },
+      "size": [
+        260,
+        450
+      ],
+      "pivots": []
+    },
+    {
+      "id": "dirt_mound",
+      "description": "Freshly dug mound of earth; withShovel plants a shovel in it.",
+      "origin": "base centre",
+      "params": {
+        "withShovel": "boolean (default false)"
+      },
+      "size": [
+        620,
+        184
+      ],
+      "pivots": []
+    },
+    {
+      "id": "lantern",
+      "description": "Clay-and-brass hand lantern hanging from its handle; glows and flickers gently (folklore pack).",
+      "origin": "top of the handle (hangs from a hand)",
+      "params": {},
+      "size": [
+        120,
+        260
+      ],
+      "pivots": [
+        "hang"
+      ]
+    },
+    {
+      "id": "tiger",
+      "description": "Bengal tiger in profile facing left, folk-patterned paper (folklore pack). head_turn/nod move the head, walk_in_place steps the legs, the tail sways by itself. Flip to face right.",
+      "origin": "ground under the middle of the body",
+      "params": {},
+      "size": [
+        800,
+        490
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "elephant",
+      "description": "Indian elephant in profile facing left, wearing a patterned vermilion saddle cloth (jhool) and a gold forehead ornament; trunk and ears sway, tail swishes. head_turn/nod move the head, walk_in_place steps the legs.",
+      "origin": "ground under the middle of the body",
+      "params": {
+        "color": "hide colour (#hex)",
+        "cloth": "saddle cloth colour (#hex)"
+      },
+      "size": [
+        720,
+        490
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "cow",
+      "description": "Zebu cow (white, humped) in profile facing left, painted horns and a marigold garland, patterned back cloth; tail swishes. head_turn/nod move the head, walk_in_place steps the legs.",
+      "origin": "ground under the middle of the body",
+      "params": {
+        "color": "hide colour (#hex)"
+      },
+      "size": [
+        580,
+        410
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "peacock",
+      "description": "Peacock facing left; train trailing on the ground, or fanned open behind it with eye-spots (params.fan: true) and shivering. The head bobs; head_turn/nod work.",
+      "origin": "ground between the feet",
+      "params": {
+        "fan": "boolean: tail fanned open"
+      },
+      "size": [
+        650,
+        490
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "owl",
+      "description": "Gond-patterned owl sitting upright, big gold eyes that blink now and then; head_turn swivels the head. Put it on a branch or wall top (origin = its feet).",
+      "origin": "feet (the perch point)",
+      "params": {
+        "color": "feather colour (#hex)"
+      },
+      "size": [
+        240,
+        380
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "crow",
+      "description": "Black crow standing, facing left; hops and caws (beak opens) every couple of seconds. An omen in folklore.",
+      "origin": "ground between the feet",
+      "params": {},
+      "size": [
+        300,
+        190
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "cobra",
+      "description": "Cobra coiled on the ground with its hood raised, swaying slowly, tongue flicking; spectacle mark on the hood.",
+      "origin": "ground under the coil",
+      "params": {
+        "color": "scale colour (#hex)"
+      },
+      "size": [
+        320,
+        510
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "birds_flock",
+      "description": "A loose V of small dark birds flapping and drifting left across the sky. Place high in the frame on the mid layer.",
+      "origin": "centre of the flock at t=0",
+      "params": {
+        "count": "number of birds (default 7)",
+        "color": "bird colour (#hex)",
+        "speed": "drift px/s (default 60)"
+      },
+      "size": [
+        900,
+        400
+      ],
+      "pivots": []
+    },
+    {
+      "id": "dog",
+      "description": "Indian street dog (pariah) in profile facing left: lean, tan, curled tail that wags, pricked ears. head_turn/nod move the head, walk_in_place steps the legs.",
+      "origin": "ground under the middle of the body",
+      "params": {
+        "color": "coat colour (#hex)"
+      },
+      "size": [
+        480,
+        310
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "horse",
+      "description": "Horse in profile facing left, dark mane, patterned saddle cloth (params.saddle: false to remove), swishing tail. head_turn/nod move the head, walk_in_place steps the legs.",
+      "origin": "ground under the middle of the body",
+      "params": {
+        "color": "coat colour (#hex)",
+        "mane": "mane colour (#hex)",
+        "saddle": "boolean (default true)",
+        "saddleColor": "#hex"
+      },
+      "size": [
+        680,
+        650
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "tree_round",
+      "description": "Folk round tree (peepal/mango): trunk and a scalloped canopy with a dotted Gond edge (diorama style).",
+      "origin": "base of the trunk",
+      "params": {
+        "color": "canopy colour (#hex), default by time of day",
+        "height": "px (default 600)"
+      },
+      "size": [
+        520,
+        870
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "palm_tree",
+      "description": "Coconut palm with a leaning trunk and fronds (diorama style).",
+      "origin": "base of the trunk",
+      "params": {
+        "color": "canopy colour (#hex), default by time of day",
+        "height": "px (default 520)",
+        "lean": "px the crown leans right (negative = left)"
+      },
+      "size": [
+        400,
+        710
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    },
+    {
+      "id": "diya",
+      "description": "Clay oil lamp (diya) with a flickering flame and glow; state.light (light_on/off actions) dims it.",
+      "origin": "base centre",
+      "params": {},
+      "size": [
+        100,
+        100
+      ],
+      "pivots": [
+        "base_left",
+        "base_right"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "blink",
+      "description": "Eyes close for the action window (use dur ≈ 0.07).",
+      "targets": [
+        "character"
+      ],
+      "params": {}
+    },
+    {
+      "id": "head_turn",
+      "description": "Head rotates from one angle to another and holds.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "from": "number (deg, default -4)",
+        "to": "number (deg, default 3)"
+      }
+    },
+    {
+      "id": "head_tilt",
+      "description": "Head tilts to an angle and holds.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "angle": "number (deg, default 8)"
+      }
+    },
+    {
+      "id": "nod",
+      "description": "Head dips down and up `count` times.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "amp": "number (px, default 16)",
+        "count": "number (default 2)"
+      }
+    },
+    {
+      "id": "shake_head",
+      "description": "Head shakes side to side, decaying.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "amp": "number (deg, default 7)",
+        "count": "number (default 3)"
+      }
+    },
+    {
+      "id": "look_up",
+      "description": "Head lifts and eyes look up, and holds.",
+      "targets": [
+        "character"
+      ],
+      "params": {}
+    },
+    {
+      "id": "expression",
+      "description": "Switch to another expression at `at`.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "to": "neutral|vacant|worried|angry|shocked|smile|sad"
+      }
+    },
+    {
+      "id": "arm_swing",
+      "description": "Both arms sway gently (idle life).",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "amp": "number (deg, default 2)",
+        "speed": "number (rad/s, default 2.5)"
+      }
+    },
+    {
+      "id": "wave",
+      "description": "One arm raises and waves an open hand.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "arm": "L|R (default R)",
+        "speed": "number (rad/s, default 10)"
+      }
+    },
+    {
+      "id": "thumb_out_wave",
+      "description": "Hitchhiker thumb arm bobs during the window, then lowers.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "arm": "L|R (default L)",
+        "amp": "number (deg, default 10)",
+        "lowerBy": "number (deg, default 70)"
+      }
+    },
+    {
+      "id": "point",
+      "description": "One arm raises to point; holds.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "arm": "L|R (default R)",
+        "angle": "number (deg outward, default 80)"
+      }
+    },
+    {
+      "id": "open_hands",
+      "description": "Both forearms lift with open palms (offering / pleading); holds.",
+      "targets": [
+        "character"
+      ],
+      "params": {}
+    },
+    {
+      "id": "walk_in_place",
+      "description": "Legs and arms alternate in stop-motion steps with a body bob.",
+      "targets": [
+        "character"
+      ],
+      "params": {
+        "steps": "number (steps/s, default 2.5)"
+      }
+    },
+    {
+      "id": "enter_from_left",
+      "description": "Slides in from the left edge, easing out.",
+      "targets": [
+        "character",
+        "prop"
+      ],
+      "params": {}
+    },
+    {
+      "id": "exit_left",
+      "description": "Slides out past the left edge, easing in.",
+      "targets": [
+        "character",
+        "prop"
+      ],
+      "params": {}
+    },
+    {
+      "id": "enter_from_right",
+      "description": "Slides in from the right edge, easing out.",
+      "targets": [
+        "character",
+        "prop"
+      ],
+      "params": {}
+    },
+    {
+      "id": "exit_right",
+      "description": "Slides out past the right edge, easing in.",
+      "targets": [
+        "character",
+        "prop"
+      ],
+      "params": {}
+    },
+    {
+      "id": "drive_in",
+      "description": "Vehicle drives in from fromX to its placement x, wheels spinning.",
+      "targets": [
+        "prop"
+      ],
+      "params": {
+        "fromX": "number (world x, default off-screen left)"
+      }
+    },
+    {
+      "id": "drive_out",
+      "description": "Vehicle accelerates away to toX.",
+      "targets": [
+        "prop"
+      ],
+      "params": {
+        "toX": "number (world x, default off-screen right)"
+      }
+    },
+    {
+      "id": "fall_over",
+      "description": "Topples about its base corner with a bounce.",
+      "targets": [
+        "prop"
+      ],
+      "params": {
+        "direction": "left|right (default right)",
+        "angle": "number (deg, default 90)"
+      }
+    },
+    {
+      "id": "swing",
+      "description": "Pendulum swing about the hang point (hanging lamps, signs).",
+      "targets": [
+        "prop",
+        "element"
+      ],
+      "params": {
+        "angle": "number (deg, default 14)",
+        "speed": "number (rad/s, default 3.2)"
+      }
+    },
+    {
+      "id": "flicker",
+      "description": "Light flickers during the window, then settles dim.",
+      "targets": [
+        "prop",
+        "element"
+      ],
+      "params": {
+        "settle": "number (light level after, default 0.3)"
+      }
+    },
+    {
+      "id": "door_open",
+      "description": "Door swings open; holds.",
+      "targets": [
+        "prop",
+        "element"
+      ],
+      "params": {}
+    },
+    {
+      "id": "door_close",
+      "description": "Door swings shut; holds.",
+      "targets": [
+        "prop",
+        "element"
+      ],
+      "params": {}
+    },
+    {
+      "id": "slam",
+      "description": "Drops in from above and lands with a bounce (newspapers, files). Pair with a camera shake.",
+      "targets": [
+        "prop"
+      ],
+      "params": {
+        "height": "number (px, default 1100)"
+      }
+    },
+    {
+      "id": "pop_in",
+      "description": "Scales up from nothing with overshoot.",
+      "targets": [
+        "prop",
+        "character"
+      ],
+      "params": {}
+    },
+    {
+      "id": "float",
+      "description": "Gentle bob up and down.",
+      "targets": [
+        "prop",
+        "character",
+        "element"
+      ],
+      "params": {
+        "amp": "number (px, default 10)",
+        "speed": "number (rad/s, default 2)"
+      }
+    },
+    {
+      "id": "tremble",
+      "description": "Fine nervous shaking.",
+      "targets": [
+        "prop",
+        "character"
+      ],
+      "params": {
+        "amp": "number (px, default 4)"
+      }
+    },
+    {
+      "id": "shake",
+      "description": "Camera shake, decaying (target \"camera\").",
+      "targets": [
+        "camera"
+      ],
+      "params": {
+        "amp": "number (px, default 14)"
+      }
+    }
+  ],
+  "characters": {
+    "bases": [
+      "adult_m",
+      "adult_f",
+      "teen_m",
+      "teen_f",
+      "elder_m",
+      "elder_f",
+      "child"
+    ],
+    "framings": [
+      "full",
+      "waist",
+      "closeup",
+      "hands",
+      "small_distant"
+    ],
+    "poses": [
+      "idle",
+      "arms_crossed",
+      "hands_on_hips",
+      "pointing",
+      "thumb_out",
+      "holding_object",
+      "hands_open_offering",
+      "phone_to_ear",
+      "hold_out",
+      "head_down"
+    ],
+    "expressions": [
+      "neutral",
+      "vacant",
+      "worried",
+      "angry",
+      "shocked",
+      "smile",
+      "sad"
+    ],
+    "hair": [
+      "side_part",
+      "crew",
+      "long_straight",
+      "long_wavy",
+      "bald",
+      "receding",
+      "bob",
+      "bun",
+      "afro",
+      "ponytail",
+      "braid",
+      "mullet",
+      "turban",
+      "veil",
+      "police_cap"
+    ],
+    "glasses": [
+      "none",
+      "large_square",
+      "round",
+      "aviator"
+    ],
+    "facialHair": [
+      "none",
+      "moustache",
+      "beard",
+      "stubble"
+    ],
+    "brows": [
+      "flat",
+      "heavy",
+      "thin",
+      "arched"
+    ],
+    "outfits": {
+      "top": [
+        "button_shirt",
+        "tshirt",
+        "sweater",
+        "suit_jacket",
+        "police_uniform",
+        "prison_jumpsuit",
+        "dress",
+        "jacket_70s",
+        "choli",
+        "kurta",
+        "sherwani",
+        "sari",
+        "khaki_uniform"
+      ],
+      "bottom": [
+        "jeans",
+        "slacks",
+        "skirt",
+        "ghagra",
+        "sari",
+        "dhoti",
+        "pajama"
+      ]
+    },
+    "handShapes": [
+      "relaxed",
+      "fist",
+      "open_palm",
+      "point",
+      "thumb_up",
+      "holding"
+    ],
+    "colours": {
+      "skin": [
+        "skin1",
+        "skin2",
+        "skin3",
+        "skin4",
+        "skin5",
+        "skin6"
+      ],
+      "hair": [
+        "blond",
+        "brown",
+        "darkBrown",
+        "black",
+        "auburn",
+        "red",
+        "grey",
+        "white"
+      ],
+      "cloth": [
+        "olive",
+        "mustard",
+        "rust",
+        "brown",
+        "cream",
+        "denim",
+        "navy",
+        "forest",
+        "burgundy",
+        "grey",
+        "charcoal",
+        "tan"
+      ]
+    }
+  },
+  "palettes": [
+    "dusk",
+    "night",
+    "interiorWarm",
+    "interiorDark",
+    "day",
+    "police",
+    "parlour"
+  ],
+  "fx": [
+    "fireflies",
+    "dust",
+    "rain",
+    "snow",
+    "red_tint",
+    "flicker",
+    "fade_black_end",
+    "fade_in",
+    "light_cone",
+    "fog"
+  ],
+  "transitions": [
+    "cut",
+    "paper_slide",
+    "flash",
+    "fade"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Horror Classics",
+  "voice": {
+    "model": "bulbul:v3",
+    "speaker": "shubh",
+    "pace": 0.95,
+    "temperature": 0.45,
+    "sampleRate": 48000,
+    "systemVoice": "Rishi",
+    "respell": {}
+  },
+  "voices": {
+    "hi-IN": { "speaker": "shubh" }
+  },
+  "music": { "moods": ["dark", "tense"], "volume": 0.18, "duckTo": 0.07 },
+  "subtitles": "caption"
+}

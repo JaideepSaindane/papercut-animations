@@ -1,0 +1,253 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Fell';src:url('https://cdn.jsdelivr.net/npm/@fontsource/im-fell-english@5.3.0/files/im-fell-english-latin-400-normal.woff2') format('woff2');}
+html,body{margin:0;padding:0;background:#000;overflow:hidden}
+svg{display:block}
+</style></head>
+<body>
+<svg id="stage" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="cut" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="d"/>
+    <feFlood flood-color="#f3ead8" result="w"/><feComposite in="w" in2="d" operator="in" result="border"/>
+    <feGaussianBlur in="d" stdDeviation="9" result="sb"/><feOffset in="sb" dx="7" dy="14" result="so"/>
+    <feFlood flood-color="#120806" flood-opacity="0.55"/><feComposite in2="so" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise"/>
+    <feComposite in="SourceGraphic" in2="noise" operator="arithmetic" k1="0" k2="1" k3="0.10" k4="-0.05" result="tex"/>
+    <feComposite in="tex" in2="SourceAlpha" operator="in" result="texc"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="border"/><feMergeNode in="texc"/></feMerge>
+  </filter>
+  <filter id="blur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="10"/></filter>
+  <filter id="blur3" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter>
+  <filter id="grain0"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter>
+  <filter id="grain1"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="2"/><feColorMatrix type="saturate" values="0"/></filter>
+  <filter id="grain2"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/></filter>
+  <filter id="grain3"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4"/><feColorMatrix type="saturate" values="0"/></filter>
+  <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#341424"/><stop offset=".3" stop-color="#7d2a33"/>
+    <stop offset=".52" stop-color="#cf6a3e"/><stop offset=".62" stop-color="#f0b36b"/><stop offset="1" stop-color="#f6cf8a"/>
+  </linearGradient>
+  <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0a1219"/><stop offset=".55" stop-color="#1a2a31"/><stop offset="1" stop-color="#22352f"/>
+  </linearGradient>
+  <radialGradient id="vig" cx=".5" cy=".48" r=".75">
+    <stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/>
+  </radialGradient>
+</defs>
+<g id="content"></g>
+</svg>
+<script>
+const W=1080,H=1920,INK='#2b1d17';
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+const outCubic=x=>1-Math.pow(1-x,3);
+const outBack=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const outBounce=x=>{const n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d)return n*(x-=1.5/d)*x+.75;if(x<2.5/d)return n*(x-=2.25/d)*x+.9375;return n*(x-=2.625/d)*x+.984375};
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const q=t=>Math.floor(t*12)/12; // stop-motion "on twos"
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const P=(d,fill,ex='')=>`<path d="${d}" fill="${fill}" stroke="${INK}" stroke-width="3" stroke-linejoin="round" ${ex}/>`;
+const R=(x,y,w,h,fill,ex='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${INK}" stroke-width="3" ${ex}/>`;
+const C=(cx,cy,r,fill,ex='')=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${INK}" stroke-width="3" ${ex}/>`;
+const cut=(s,ex='')=>`<g filter="url(#cut)" ${ex}>${s}</g>`;
+const blur=(s,f='blur')=>`<g filter="url(#${f})">${s}</g>`;
+const cam=(s,k,dx=0,dy=0)=>`<g transform="translate(540 960) scale(${k}) translate(${-540+dx} ${-960+dy})">${s}</g>`;
+const rot=(s,a,cx,cy)=>`<g transform="rotate(${a} ${cx} ${cy})">${s}</g>`;
+
+function pine(x,base,h,w,col){
+  let s=R(x-14,base-h*.18,28,h*.18,'#4a2f22');
+  for(let i=0;i<4;i++){const y0=base-h*.15-i*h*.21, ww=w*(1-i*.2);
+    s+=P(`M${x-ww/2} ${y0} L${x} ${y0-h*.36} L${x+ww/2} ${y0} Z`,col);}
+  return cut(s);
+}
+function fireflies(t,n,area,col){let s='';for(let i=0;i<n;i++){
+  const x=area[0]+rnd(i)*area[2]+20*Math.sin(t*1.3+i), y=area[1]+rnd(i+50)*area[3]+15*Math.cos(t*1.1+i*2);
+  const a=.25+.75*Math.max(0,Math.sin(t*4+i*1.7));
+  s+=`<circle cx="${x}" cy="${y}" r="16" fill="${col}" opacity="${a*.35}" filter="url(#blur3)"/><circle cx="${x}" cy="${y}" r="5" fill="${col}" opacity="${a}"/>`;}return s}
+
+/* ---------- SHOT 1: the house, dusk ---------- */
+function s1(t,p){
+  const k=1+.08*ease(p);
+  let bg=`<rect x="-200" y="-200" width="1480" height="2320" fill="url(#dusk)"/>
+   <circle cx="660" cy="1010" r="260" fill="#ffd38a" opacity=".35" filter="url(#glow)"/>
+   <circle cx="660" cy="1010" r="95" fill="#ffe6a8"/>`;
+  bg+=blur(`<path d="M-200 1090 C 150 990 350 1060 560 1015 C 760 975 950 1050 1280 990 L1280 2200 L-200 2200Z" fill="#5a3438"/>
+   <path d="M-200 1170 C 200 1110 500 1160 700 1125 C 900 1095 1050 1135 1280 1110 L1280 2200 L-200 2200Z" fill="#33433a"/>`
+   +[120,230,880,960,1010].map((x,i)=>`<path d="M${x-50} 1180 L${x} ${960-i*20} L${x+50} 1180Z" fill="#26342d"/>`).join(''));
+  let mid=`<path d="M-200 1290 C 200 1262 800 1262 1280 1290 L1280 2200 L-200 2200Z" fill="#55703e"/>
+   <path d="M690 1300 L770 1300 L1000 2100 L740 2100Z" fill="#9c8c6e" opacity=".85"/>`;
+  let house=`${R(650,985,42,90,'#7a3b2c')}${R(290,1100,500,200,'#d7c39a')}`;
+  for(let y=1122;y<1295;y+=22) house+=`<line x1="292" y1="${y}" x2="788" y2="${y}" stroke="#b49c6c" stroke-width="2"/>`;
+  [[330,110],[470,110],[715,55]].forEach(([x,w])=>{house+=R(x,1150,w,80,'#ffcf6e')+`<line x1="${x+w/2}" y1="1150" x2="${x+w/2}" y2="1230" stroke="${INK}" stroke-width="3"/><line x1="${x}" y1="1190" x2="${x+w}" y2="1190" stroke="${INK}" stroke-width="3"/>`});
+  house+=R(615,1160,70,140,'#6a2c23')+`<circle cx="672" cy="1235" r="5" fill="#e0b86a"/>`;
+  house+=P('M235 1118 L540 975 L845 1118 Z','#4a2b20');
+  mid+=cut(house)+`<g style="mix-blend-mode:screen">${[[385,1190],[525,1190],[742,1190]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="70" fill="#ffb84a" opacity=".35" filter="url(#glow)"/>`).join('')}</g>`;
+  mid+=fireflies(t,9,[100,1250,880,250],'#ffe98a');
+  const mail=cut(R(203,1460,22,300,'#5a3a28')+P('M150 1470 L150 1415 C150 1390 280 1390 280 1415 L280 1470 Z','#8b9094')+R(272,1370,10,55,'#b23a2a'));
+  const fk=1+.14*ease(p);
+  const fg=cam(`<g transform="translate(${-70*ease(p)} 0)">${pine(95,1720,1150,330,'#1f3329')}</g><g transform="translate(${70*ease(p)} 0)">${pine(1000,1780,1250,360,'#223a2e')}</g>`+mail,fk);
+  return cam(bg,1+.03*p)+cam(mid,k)+fg;
+}
+
+/* ---------- SHOT 2: Dahmer, home alone ---------- */
+function s2(t,p){
+  const tq=q(t), pq=tq/2;
+  let bg=`<rect x="-200" y="-200" width="1480" height="2320" fill="#6b2230"/>`;
+  for(let x=-200;x<1300;x+=64) bg+=`<rect x="${x}" y="-200" width="26" height="1560" fill="#5a1b28"/>`;
+  bg+=`<rect x="-200" y="1340" width="1480" height="900" fill="#3b2620"/><rect x="-200" y="1330" width="1480" height="20" fill="#8a5a3a"/>
+   <rect x="70" y="500" width="290" height="420" fill="#e9dcc0"/><rect x="88" y="518" width="254" height="384" fill="#3a4f6e"/>
+   <rect x="40" y="480" width="80" height="520" fill="#a3483a"/><rect x="310" y="480" width="80" height="520" fill="#a3483a"/>
+   <rect x="640" y="520" width="210" height="160" fill="#c9b48a"/><rect x="660" y="540" width="170" height="120" fill="#7a6a4a"/>
+   <circle cx="930" cy="760" r="230" fill="#ffd990" opacity=".45"/><path d="M870 780 L990 780 L960 690 L900 690 Z" fill="#e6c070"/>
+   <rect x="925" y="780" width="10" height="560" fill="#2a1a14"/>`;
+  const k=1+.07*ease(p);
+  const skin='#edbb93', shirt='#7c6a3c';
+  let body=cut(R(505,1070,70,110,'#e3ad85')+P('M350 1250 C 370 1170 460 1148 540 1148 C 620 1148 710 1170 730 1250 L 770 1990 L 310 1990 Z',shirt)
+     +`<line x1="540" y1="1230" x2="540" y2="1990" stroke="${INK}" stroke-width="3"/>`+[1300,1400,1500,1600].map(y=>`<circle cx="552" cy="${y}" r="7" fill="#d8c79a" stroke="${INK}" stroke-width="2"/>`).join('')
+     +R(600,1300,80,70,'#6d5c32')
+     +P('M462 1158 L540 1235 L495 1275 Z','#8f7c48')+P('M618 1158 L540 1235 L585 1275 Z','#8f7c48'));
+  const sw=2*Math.sin(tq*2.5);
+  const armL=rot(cut(P('M372 1245 C 330 1300 318 1450 328 1630 L 392 1638 C 396 1480 402 1360 425 1285 Z',shirt)+`<ellipse cx="360" cy="1680" rx="36" ry="52" fill="${skin}" stroke="${INK}" stroke-width="3"/>`),sw,395,1262);
+  const armR=rot(cut(P('M708 1245 C 750 1300 762 1450 752 1630 L 688 1638 C 684 1480 678 1360 655 1285 Z',shirt)+`<ellipse cx="720" cy="1680" rx="36" ry="52" fill="${skin}" stroke="${INK}" stroke-width="3"/>`),-sw,685,1262);
+  const blink=(t>1.05&&t<1.2);
+  const eyes=blink?`<line x1="476" y1="990" x2="496" y2="990" stroke="${INK}" stroke-width="4"/><line x1="584" y1="990" x2="604" y2="990" stroke="${INK}" stroke-width="4"/>`
+     :`<circle cx="486" cy="990" r="7" fill="${INK}"/><circle cx="594" cy="990" r="7" fill="${INK}"/>`;
+  let head=`<ellipse cx="416" cy="1000" rx="22" ry="34" fill="${skin}" stroke="${INK}" stroke-width="3"/><ellipse cx="664" cy="1000" rx="22" ry="34" fill="${skin}" stroke="${INK}" stroke-width="3"/>
+   <ellipse cx="540" cy="990" rx="125" ry="150" fill="${skin}" stroke="${INK}" stroke-width="3"/>
+   ${P('M408 975 C 395 845 468 800 545 800 C 645 800 698 855 674 965 C 655 905 605 882 560 886 C 515 872 465 905 428 975 Z','#d4ad55')}
+   ${P('M562 886 C 520 900 470 935 448 968 C 478 912 525 880 610 872 Z','#c39a44')}
+   <line x1="452" y1="936" x2="516" y2="944" stroke="#a9853c" stroke-width="9" stroke-linecap="round"/><line x1="564" y1="944" x2="628" y2="936" stroke="#a9853c" stroke-width="9" stroke-linecap="round"/>
+   ${eyes}
+   <rect x="438" y="948" width="96" height="76" rx="18" fill="#fff6dc" fill-opacity=".22" stroke="#3b2a20" stroke-width="7"/>
+   <rect x="546" y="948" width="96" height="76" rx="18" fill="#fff6dc" fill-opacity=".22" stroke="#3b2a20" stroke-width="7"/>
+   <line x1="534" y1="975" x2="546" y2="975" stroke="#3b2a20" stroke-width="6"/>
+   <path d="M540 1010 C 530 1040 528 1052 550 1054" fill="none" stroke="${INK}" stroke-width="3"/>
+   <path d="M508 1090 C 530 1086 552 1086 572 1089" fill="none" stroke="#8a4a3a" stroke-width="5" stroke-linecap="round"/>`;
+  const ha=-4+7*ease(clamp(pq*1.2));
+  const char=armL+armR+body+rot(cut(head),ha,540,1150);
+  return cam(blur(bg),1+.03*p)+cam(char,k,0,-10*p);
+}
+
+/* ---------- SHOT 3: the hitchhiker ---------- */
+function s3(t,p){
+  const tq=q(t);
+  let bg=`<rect x="-200" y="-200" width="1480" height="2320" fill="url(#dusk)"/>
+   <circle cx="250" cy="1000" r="230" fill="#ffd38a" opacity=".4" filter="url(#glow)"/><circle cx="250" cy="1010" r="80" fill="#ffe6a8"/>`;
+  bg+=blur(`<rect x="-200" y="1050" width="1480" height="220" fill="#7a7442"/>`+[...Array(14)].map((_,i)=>`<ellipse cx="${-150+i*100}" cy="1060" rx="${70+rnd(i)*40}" ry="${40+rnd(i+9)*40}" fill="#3d4a35"/>`).join('')
+     +[120,520,920].map(x=>`<rect x="${x}" y="760" width="14" height="330" fill="#3a2a22"/><rect x="${x-40}" y="780" width="94" height="10" fill="#3a2a22"/>`).join('')
+     +`<path d="M-200 800 Q 330 850 527 790 Q 730 850 927 790 Q 1100 840 1300 800" fill="none" stroke="#3a2a22" stroke-width="4"/>`);
+  const pan=-40*ease(p);
+  let road=`<rect x="-200" y="1260" width="1480" height="175" fill="#4a4542"/><rect x="-200" y="1255" width="1480" height="10" fill="#6d665e"/>`;
+  for(let x=-200;x<1300;x+=150) road+=`<rect x="${x}" y="1342" width="70" height="10" fill="#e3c25a"/>`;
+  road+=`<rect x="-200" y="1432" width="1480" height="800" fill="#56683a"/>`;
+  // car
+  const cp=outCubic(seg(p,0,.62)), cx=-1000+(-95+1000)*cp, wa=(cx+1000)/59*57.3;
+  const wheel=wx=>`<g transform="translate(${wx} 120)">${C(0,0,44,'#1e1a18')}${C(0,0,21,'#c8c8c8')}<g transform="rotate(${wa})"><line x1="-20" y1="0" x2="20" y2="0" stroke="${INK}" stroke-width="4"/><line x1="0" y1="-20" x2="0" y2="20" stroke="${INK}" stroke-width="4"/></g></g>`;
+  const car=`<g transform="translate(${cx} 1212) scale(1.4)">`+cut(P('M0 120 L 0 70 C 0 55 15 50 40 48 L 150 40 L 205 -12 L 362 -12 L 425 40 L 540 50 C 560 52 568 65 568 80 L 568 120 Z','#2f5f52')
+     +P('M215 0 L285 0 L285 38 L172 38Z','#a9c9c6')+P('M296 0 L357 0 L408 38 L296 38Z','#a9c9c6')
+     +`<circle cx="335" cy="20" r="15" fill="${INK}"/><rect x="336" y="16" width="16" height="3" fill="#e9e3cf"/>`
+     +`<line x1="10" y1="82" x2="558" y2="82" stroke="#e6dcc0" stroke-width="4"/>`+R(548,94,30,14,'#cfcfcf')+R(-10,94,30,14,'#cfcfcf')
+     +C(560,70,9,'#ffe8a0')+wheel(120)+wheel(450))+`<circle cx="600" cy="72" r="60" fill="#ffe8a0" opacity=".35" filter="url(#glow)"/></g>`;
+  // hitchhiker
+  const sk='#e0a982';
+  const armA = p<.62 ? -12+10*Math.sin(tq*7) : -12+50*outCubic(seg(p,.62,.8));
+  const hh=cut(P('M770 1200 L758 1440 L794 1440 L801 1265 L808 1440 L844 1440 L832 1200 Z','#3f5c8a')
+     +R(752,1432,46,16,'#3a2a20')+R(806,1432,46,16,'#3a2a20')
+     +P('M836 1072 L862 1190 L846 1196 L822 1086Z',sk)
+     +P('M758 1062 C 768 1040 832 1040 842 1062 L 848 1212 L 752 1212 Z','#e8e0cc')
+     +R(788,1035,26,26,sk)
+     +P('M752 1012 C 748 945 852 945 850 1012 L 856 1068 L 832 1060 L 824 995 L 780 995 L 772 1064 L 748 1068Z','#6b4428')
+     +C(800,1012,40,sk)+P('M760 1000 C 770 960 840 958 846 1000 C 830 980 790 975 760 1000Z','#6b4428')
+     +`<circle cx="780" cy="1012" r="5" fill="${INK}"/><path d="M772 1036 L 786 1036" stroke="${INK}" stroke-width="3"/>`);
+  const thumb=rot(cut(P('M770 1062 L740 1075 L745 1100 L775 1090Z','#e8e0cc')+P('M745 1080 L 680 1100 L 684 1120 L 750 1098 Z',sk)+C(672,1110,17,sk)+P('M664 1098 L661 1066 C 661 1056 675 1056 675 1066 L 678 1098Z',sk)),armA,765,1078);
+  return cam(blur(bg),1.02,pan*.4)+cam(road+car+thumb+hh,1+.05*ease(p),pan);
+}
+
+/* ---------- SHOT 4: the attempt to leave (non-graphic) ---------- */
+function s4(t,p){
+  const tq=q(t);
+  const hit=seg(p,.42,.55);
+  const shake = (p>.42&&p<.6)? (rnd(Math.floor(t*24))-.5)*14*(1-seg(p,.42,.6)) : 0;
+  let bg=`<rect x="-200" y="-200" width="1480" height="2320" fill="#2a1b24"/>`;
+  for(let x=-200;x<1300;x+=64) bg+=`<rect x="${x}" y="-200" width="26" height="1560" fill="#241720"/>`;
+  bg+=`<rect x="370" y="640" width="280" height="580" fill="#574036"/><rect x="390" y="660" width="240" height="560" fill="#3b2a24"/>
+   <rect x="598" y="660" width="22" height="560" fill="#6d8fb0" opacity=".8"/>
+   <rect x="760" y="610" width="210" height="270" fill="#574036"/><rect x="775" y="625" width="180" height="240" fill="#1d2b44"/><circle cx="900" cy="690" r="26" fill="#e9e1c4"/>
+   <rect x="-200" y="1220" width="1480" height="900" fill="#1c1218"/>`;
+  // chair falls
+  const ca=80*outBounce(hit);
+  const chair=rot(cut(R(790,960,28,330,'#5a3a28')+R(790,1180,170,26,'#6b4428')+R(930,1180,26,260,'#5a3a28')+R(800,1180,22,260,'#5a3a28')+R(800,1010,10,170,'#5a3a28',`stroke-width="2"`)),ca,956,1440);
+  const chairG=`<g transform="translate(-130 0)">${chair}</g>`;
+  // table + bottles
+  const table=cut(R(110,1300,860,42,'#6b4428')+R(150,1342,40,700,'#4f321f')+R(890,1342,40,700,'#4f321f')+R(130,1342,820,40,'#5a3a24'));
+  const bottle=(x)=>P(`M${x-28} 1300 L${x-28} 1150 C ${x-28} 1125 ${x-12} 1115 ${x-12} 1095 L ${x-12} 1050 L ${x+12} 1050 L ${x+12} 1095 C ${x+12} 1115 ${x+28} 1125 ${x+28} 1150 L ${x+28} 1300 Z`,'#5a3216')
+     +R(x-26,1190,52,50,'#e8dcc0',`stroke-width="2"`)+`<rect x="${x-26}" y="1205" width="52" height="12" fill="#a8322a"/>`;
+  const b1=cut(bottle(400));
+  const b2=rot(cut(bottle(600)),90*outBounce(hit),628,1300);
+  // swinging lamp
+  const la=14*Math.sin(tq*3.2+.4);
+  let on=1; if(p>.45){const f=Math.floor(t*24); on = (rnd(f)>.45)?.55:.15; if(p>.8) on=.3;}
+  const lamp=rot(`<path d="M540 -50 L540 830" stroke="${INK}" stroke-width="5"/>`
+     +`<path d="M470 905 L610 905 L575 830 L505 830Z" fill="#ffe39a" opacity="0"/>`
+     +`<path d="M480 905 L600 905 L760 1320 L320 1320Z" fill="#ffe39a" opacity="${.22*on}" filter="url(#blur3)"/>`
+     +cut(P('M470 905 L610 905 L575 830 L505 830Z','#2e5a52'))+`<circle cx="540" cy="910" r="18" fill="#fff2b0" opacity="${.3+.7*on}"/><circle cx="540" cy="910" r="120" fill="#ffe39a" opacity="${.35*on}" filter="url(#glow)"/>`,la,540,-50);
+  const red=`<rect x="0" y="0" width="1080" height="1920" fill="#9c1414" opacity="${.38*seg(p,.45,.75)}" style="mix-blend-mode:multiply"/>`;
+  const scene=cam(blur(bg),1+.03*p)+cam(chairG,1+.06*ease(p),0,0)+cam(table+b1+b2,1+.06*ease(p))+lamp;
+  return `<g transform="translate(${shake} ${shake*.6})">${scene}</g>`+red;
+}
+
+/* ---------- SHOT 5: the woods, 13 years of silence ---------- */
+function s5(t,p){
+  let bg=`<rect x="-200" y="-200" width="1480" height="2320" fill="url(#night)"/>
+   <circle cx="250" cy="640" r="200" fill="#efe6c8" opacity=".25" filter="url(#glow)"/><circle cx="250" cy="640" r="70" fill="#efe6c8"/>`;
+  bg+=blur([...Array(11)].map((_,i)=>`<rect x="${-150+i*125+rnd(i)*40}" y="-200" width="${40+rnd(i+3)*60}" height="1700" fill="${i%2?'#16231f':'#1d2e28'}"/>`).join('')
+     +`<path d="M-200 1340 C 300 1300 700 1320 1280 1335 L1280 2200 L-200 2200Z" fill="#202c25"/>`);
+  let mid=`<path d="M-200 1380 C 300 1340 700 1350 1280 1370 L1280 2200 L-200 2200Z" fill="#26332a"/>`;
+  mid+=cut(P('M250 1430 C 330 1300 470 1268 560 1268 C 690 1268 800 1320 850 1430 Z','#4b3527')+[[380,1360],[460,1320],[650,1330],[740,1380],[560,1300]].map(([x,y],i)=>`<ellipse cx="${x}" cy="${y}" rx="${14+i*2}" ry="9" fill="#3a281c"/>`).join(''));
+  const shovel=rot(cut(R(590,940,22,400,'#8a5a34')+P('M570 905 L632 905 L632 945 L570 945 Z','#8a5a34','fill-opacity="0"')+P('M578 905 C 578 880 624 880 624 905 L 624 945 L 612 945 L 612 915 L 590 915 L 590 945 L 578 945 Z','#8a5a34')
+      +P('M568 1300 L634 1300 L638 1385 C 622 1415 580 1415 564 1385 Z','#8f918c')),-16,601,1330);
+  mid+=shovel+cut(P('M470 1432 C 520 1372 660 1372 720 1432 Z','#4b3527'));
+  mid+=fireflies(t,7,[120,1000,840,350],'#d8f08a');
+  const fern=(x0,flip)=>cut([...Array(9)].map((_,i)=>{const bx=x0+flip*(i*26), h=260+rnd(i+flip*7)*220, lean=flip*(40+rnd(i+3)*90);
+     return P(`M${bx-14} 1960 Q ${bx+lean*.3} ${1960-h*.6} ${bx+lean} ${1960-h} Q ${bx+lean*.2+8} ${1960-h*.5} ${bx+14} 1960 Z`,i%2?'#1f3326':'#2a4632')}).join(''));
+  const fg=cam(fern(10,1)+fern(1070,-1),1+.14*ease(p));
+  const fade=`<rect x="0" y="0" width="1080" height="1920" fill="#000" opacity="${seg(p,.82,1)}"/>`;
+  return cam(bg,1+.03*p)+cam(mid,1+.09*ease(p))+fg+fade;
+}
+
+const SHOTS=[
+  {a:0,  b:2,  cap:'June 1978. Ohio.', tilt:-1.2, draw:s1},
+  {a:2,  b:4,  cap:'Jeffrey Dahmer, 18, home alone.', tilt:1, draw:s2},
+  {a:4,  b:6,  cap:'He picked up a hitchhiker, Steven Hicks.', tilt:-.8, draw:s3},
+  {a:6,  b:8,  cap:'When Hicks tried to leave, Dahmer killed him.', tilt:1.1, draw:s4},
+  {a:8,  b:10, cap:'No one would know for 13 years.', tilt:-1, draw:s5},
+];
+const ctx=document.createElement('canvas').getContext('2d');
+function caption(text,lt,tilt,fadeOut){
+  let fs=54; ctx.font=`${fs}px Fell`; let w=ctx.measureText(text).width;
+  if(w>860){fs=fs*860/w; ctx.font=`${fs}px Fell`; w=ctx.measureText(text).width;}
+  const cw=w+110, ch=fs+70, x=540-cw/2;
+  const e=outBack(clamp(lt/.28)); const y=-200+(250+200)*e;
+  const a=tilt*(1+2*(1-e));
+  return `<g transform="translate(0 ${y}) rotate(${a} 540 ${ch/2})" opacity="${1-fadeOut}" filter="url(#cut)">
+   <rect x="${x}" y="0" width="${cw}" height="${ch}" fill="#efe5cf" stroke="#3b2b22" stroke-width="3"/>
+   <rect x="${x+10}" y="10" width="${cw-20}" height="${ch-20}" fill="none" stroke="#3b2b22" stroke-width="1.5"/>
+   <rect x="${x+15}" y="15" width="${cw-30}" height="${ch-30}" fill="none" stroke="#3b2b22" stroke-width="1"/>
+   ${[[x+24,24],[x+cw-24,24],[x+24,ch-24],[x+cw-24,ch-24]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="3" fill="#3b2b22"/>`).join('')}
+   <circle cx="540" cy="2" r="9" fill="#b68a3a" stroke="#3b2b22" stroke-width="2"/>
+   <text x="540" y="${ch/2+fs*.32}" text-anchor="middle" font-family="Fell" font-size="${fs}" fill="#2b1d17">${text}</text></g>`;
+}
+window.render=function(t,frame){
+  const s=SHOTS.find(s=>t>=s.a&&t<s.b)||SHOTS[SHOTS.length-1];
+  const lt=t-s.a, p=lt/(s.b-s.a);
+  const jit=`translate(${(rnd(Math.floor(frame/2))-.5)*2.5} ${(rnd(Math.floor(frame/2)+99)-.5)*2.5})`;
+  const capFade = s===SHOTS[4]? seg(p,.85,1):0;
+  document.getElementById('content').innerHTML=
+    `<g transform="${jit}">${s.draw(lt,p)}</g>`+
+    `<rect x="0" y="0" width="1080" height="1920" fill="url(#vig)"/>`+
+    `<rect x="0" y="0" width="1080" height="1920" filter="url(#grain${Math.floor(frame/2)%4})" opacity=".16" style="mix-blend-mode:overlay"/>`+
+    caption(s.cap,lt,s.tilt,capFade);
+};
+</script></body></html>
